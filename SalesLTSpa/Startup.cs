@@ -27,10 +27,12 @@ namespace SalesLTSpa
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string[] corsOrigins = Configuration.GetSection("AllowedHosts").Get<string[]>();
             services.AddControllers();
 
             services.AddDbContext<SalesLTSpaContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesLTSpaContext"), builder => builder.MigrationsAssembly("SalesLTSpa")));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,11 +43,11 @@ namespace SalesLTSpa
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors();
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(option => option.AllowAnyOrigin());
 
             app.UseAuthorization();
 

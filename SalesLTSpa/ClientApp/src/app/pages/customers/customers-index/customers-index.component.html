@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="route.children.length === 0" class="container">
     <h1>Clientes</h1>
     <br/>
     <table class="table">
@@ -12,18 +12,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Alex Blue</td>
-                <td>alex@gmail.com</td>
-                <td>(27)99778-3093</td>
-                <td>20/03/1998</td>
+            <tr *ngFor="let item of data">
+                <td>{{item.fullName}}</td>
+                <td>{{item.emailAddress}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.birthDate  | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <a href="#" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Editar</a>
-                    <a href="#" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Detalhes</a>
-                    <a href="#" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Excluir</a>
+                    <a routerLink="/Customers/Edit" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Editar</a>
+                    <a routerLink="/Customers/Details" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Detalhes</a>
+                    <a routerLink="/Customers/Delete" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Excluir</a>
                 </td>
             </tr>
-    
+            <ul>
+                <li *ngFor="let item of data">
+                    
+                </li>
+            </ul>
         </tbody>
     </table>
 </div>
+<router-outlet></router-outlet>

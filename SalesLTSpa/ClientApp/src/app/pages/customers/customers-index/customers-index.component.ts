@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customers-index',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomersIndexComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+
+  constructor(private customerService : CustomerService,
+    public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getCustomers();
   }
 
+  getCustomers(){
+    this.customerService.getAllCustomers().subscribe( (data: any) =>{
+      this.data = data;
+    });
+  }
 }

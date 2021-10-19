@@ -1,0 +1,7 @@
+{ 
+    "api":[
+       {
+        "apiUrl" : "http://localhost:1168/api"
+       }
+    ]
+}

@@ -4,7 +4,8 @@ import { CustomersIndexComponent } from './pages/customers/customers-index/custo
 import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent }
+  {path:'Home', component: HomeComponent },
+  {path: '', pathMatch: 'full', redirectTo:'Home'}
 ];
 
 @NgModule({
