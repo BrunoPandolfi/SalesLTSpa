@@ -14,6 +14,10 @@ namespace SalesLTSpa.Data
         {
         }
 
-        public DbSet<SalesLTSpa.Models.Customer> Customer { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<SalesOrderHeader> SalesOrderHeader { get; set; }
+
+        public DbSet<SalesOrderDetail> SalesOrderDetail { get; set; }
     }
 }

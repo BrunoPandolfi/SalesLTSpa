@@ -21,7 +21,7 @@ namespace SalesLTSpa.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
-        //public ICollection<SalesOrderHeader> salesOrders = new List<SalesOrderHeader>();
+        public ICollection<SalesOrderHeader> salesOrders = new List<SalesOrderHeader>();
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
 

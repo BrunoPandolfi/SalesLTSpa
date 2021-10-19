@@ -12,22 +12,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of data">
-                <td>{{item.fullName}}</td>
-                <td>{{item.emailAddress}}</td>
-                <td>{{item.phone}}</td>
-                <td>{{item.birthDate  | date: 'dd/MM/yyyy'}}</td>
+            <tr *ngFor="let customer of data">
+                <td>{{customer.fullName}}</td>
+                <td>{{customer.emailAddress}}</td>
+                <td>{{customer.phone}}</td>
+                <td>{{customer.birthDate  | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <a routerLink="/Customers/Edit" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Editar</a>
-                    <a routerLink="/Customers/Details" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Detalhes</a>
-                    <a routerLink="/Customers/Delete" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Excluir</a>
+                    <a [routerLink]="['/Customers/Edit', customer.customerID ]" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Editar</a>
+                    <a [routerLink]="['/Customers/Details', customer.customerID ]" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Detalhes</a>
+                    <a [routerLink]="['/Customers/Delete', customer.customerID ]" class="btn btn-sm btn-link mb-3" style="font-size: 10pt">Excluir</a>
                 </td>
             </tr>
-            <ul>
-                <li *ngFor="let item of data">
-                    
-                </li>
-            </ul>
         </tbody>
     </table>
 </div>

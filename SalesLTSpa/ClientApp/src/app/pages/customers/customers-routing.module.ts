@@ -9,13 +9,13 @@ const routes: Routes = [
       path: 'Create', component: FormDataCustomerComponent
     },
     {
-      path: 'Edit', component: FormDataCustomerComponent
+      path: 'Edit/:id', component: FormDataCustomerComponent
     },
     {
-      path: 'Details', component: FormDataCustomerComponent
+      path: 'Details/:id', component: FormDataCustomerComponent
     },
     {
-      path: 'Delete', component: FormDataCustomerComponent
+      path: 'Delete/:id', component: FormDataCustomerComponent
     }
   ]}
 ];
