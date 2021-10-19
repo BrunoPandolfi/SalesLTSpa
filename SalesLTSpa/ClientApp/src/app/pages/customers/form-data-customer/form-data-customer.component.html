@@ -1,1 +1,38 @@
-<p>form-data-customer works!</p>
+<h1>Criar Novo Cliente</h1>
+<br/>
+<div class="row">
+    <div class="col-6">
+        <form [formGroup]="formCustomer" (ngSubmit)="customerID ? putCustomer() : postCustomer()">
+            <div *ngIf="customerID">
+                <input type="hidden" formControName="CustomerID"/>
+            </div>
+            <div class="form-group">
+                <label for="FirstName">Nome</label>
+                <input type="text" class="form-control" id="FirstName" placeholder="Nome" formControlName="FirstName"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="LastName">Sobrenome</label>
+                <input type="text" class="form-control" id="LastName" placeholder="Sobrenome" formControlName="LastName"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="EmailAddress">Email</label>
+                <input type="text" class="form-control" id="EmailAddress" placeholder="Email" formControlName="EmailAddress"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Phone">Telefone</label>
+                <input type="text" class="form-control" id="Phone" placeholder="Telefone" formControlName="Phone"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="BirthDate">Data Nascimento</label>
+                <input type="date" class="form-control" id="BirthDate" placeholder="dd/MM/aaaa" formControlName="BirthDate"/>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-info ms-2 text-light" (click)="voltarIndex()">Voltar</button>
+        </form>
+    </div>
+</div>

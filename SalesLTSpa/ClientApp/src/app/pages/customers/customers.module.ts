@@ -7,6 +7,7 @@ import { CustomersDetailsComponent } from './customers-details/customers-details
 import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 import { FormDataCustomerComponent } from './form-data-customer/form-data-customer.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     CustomersRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   exports: [
     CustomersIndexComponent

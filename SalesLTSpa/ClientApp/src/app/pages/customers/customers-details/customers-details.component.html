@@ -1,1 +1,22 @@
-<p>customers-details works!</p>
+<div *ngIf="loading" class="row">
+    <h5>Carregando dados do usuário...</h5>
+</div>
+<div *ngIf="!loading" class="card">
+    <div class="card-header">
+        <h2>Dados do Cliente</h2>
+    </div>
+    <div class="card-body p-4">
+        <dl class="row">
+            <dt class="col-2">Nome Completo</dt>
+            <dd class="col-10">{{customerData.fullName}}</dd>
+            <dt class="col-2">Email</dt>
+            <dd class="col-10">{{customerData.emailAddress}}</dd>
+            <dt class="col-2">Telefone</dt>
+            <dd class="col-10">{{customerData.phone}}</dd>
+            <dt class="col-2">Data Nascimento</dt>
+            <dd class="col-10">{{customerData.birthDate | date: 'dd/MM/yyyy'}}</dd>
+        </dl>
+        <a class="btn btn-primary me-2">Ver Pedidos</a>
+        <a class="btn btn-info" routerLink="/Customers">Voltar</a>
+    </div>
+</div>

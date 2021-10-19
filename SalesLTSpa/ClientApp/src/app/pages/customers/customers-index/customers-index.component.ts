@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -12,15 +12,20 @@ export class CustomersIndexComponent implements OnInit {
   data: any;
 
   constructor(private customerService : CustomerService,
-    public route: ActivatedRoute) { }
+    public route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getCustomers();
   }
 
   getCustomers(){
-    this.customerService.getAllCustomers().subscribe( (data: any) =>{
+    this.customerService.updateCustomerList().subscribe( (data: any) =>{
       this.data = data;
     });
+  }
+
+  criarNovoCliente(){
+    this.router.navigate(['Create'], {relativeTo: this.route})
   }
 }
