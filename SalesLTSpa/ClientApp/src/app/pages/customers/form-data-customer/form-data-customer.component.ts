@@ -14,7 +14,6 @@ export class FormDataCustomerComponent implements OnInit {
 
   customerID: any;
   formCustomer: FormGroup;
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,11 +28,11 @@ export class FormDataCustomerComponent implements OnInit {
     var customer = {};
     const pipe = new DatePipe('en-US');
     this.formCustomer = this.formBuilder.group({
-      FirstName: [null],
-      LastName: [null],
-      EmailAddress: [null],
-      Phone: [null],
-      BirthDate: [null]
+      FirstName: [''],
+      LastName: [''],
+      EmailAddress: [''],
+      Phone: [''],
+      BirthDate: ['']
     });
     if (this.customerID)
     {

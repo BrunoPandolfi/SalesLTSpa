@@ -12,6 +12,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
+using SalesLTSpa.Services;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace SalesLTSpa
 {
@@ -28,12 +32,13 @@ namespace SalesLTSpa
         public void ConfigureServices(IServiceCollection services)
         {
             string[] corsOrigins = Configuration.GetSection("AllowedHosts").Get<string[]>();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddDbContext<SalesLTSpaContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesLTSpaContext"), builder => builder.MigrationsAssembly("SalesLTSpa")));
             services.AddCors();
             services.AddScoped<SeedingService>();
+            services.AddScoped<ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +49,13 @@ namespace SalesLTSpa
                 app.UseDeveloperExceptionPage();
                 seedingService.Seed();
             }
+
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                RequestPath = new PathString("/Images")
+            });
 
             app.UseHttpsRedirection();
 

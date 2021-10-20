@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import * as data from '../../../assets/config.json';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CustomerService {
 
-  readonly rootURL = 'http://localhost:1168/api';
+  readonly rootURL = data.default.api;
   customerList = new BehaviorSubject<any[]>([]);
 
   constructor(private http: HttpClient) { }

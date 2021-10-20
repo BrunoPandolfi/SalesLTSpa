@@ -46,18 +46,18 @@ namespace SalesLTSpa.Data
             SalesOrderHeader o11 = new SalesOrderHeader(11, new DateTime(2021, 06, 06), SaleStatus.Approved, false, "125481", 342.00, 6.84, "Sem observações", c3);
             SalesOrderHeader o12 = new SalesOrderHeader(12, new DateTime(2021, 05, 29), SaleStatus.Approved, true, "125479", 7200.00, 144.00, "Sem observações", c4);
 
-            Product p1 = new Product(1, "Dell G15 15,6 Notebook", "G5510U6000W", "grey", 800.00, 5700.00, new DateTime(2022, 5, 20), "produto1.jpeg", "produto1.jpeg");
-            Product p2 = new Product(2, "Lavadora de Alta Pressão Electrolux", "EWS31", "yellow", 200.00, 450.00, new DateTime(2022, 2, 10), "produto2.png", "produto2.png");
-            Product p3 = new Product(3, "Xiaomi Mi Smart Band 5", "XMSH10HM", "black", 100.00, 530.00, new DateTime(2023, 7, 1), "produto3.jpg", "produto3.jpg");
-            Product p4 = new Product(4, "Lâmpada Inteligente Xiaomi Yeelight", "white", "MJDPL01YL", 50.00, 140.00, new DateTime(2022, 12, 23), "produto4.jpg", "produto4.jpg");
-            Product p5 = new Product(5, "Playstation 5", "CFI1014A", "white", 500.00, 4200.00, new DateTime(2026, 1, 1), "produto5.jpeg", "produto5.jpeg");
-            Product p6 = new Product(6, "Xbox Series X", "B088GHBH92", "black piano", 400.00, 3800.00, new DateTime(2026, 3, 1), "produto6.jpg", "produto6.jpg");
-            Product p7 = new Product(7, "SmartTV Samsung 50 pol.", "QN50Q60AAGXZD", "black piano", 700.00, 3700.00, new DateTime(2022, 4, 13), "produto7.jpg", "produto7.jpg");
-            Product p8 = new Product(8, "Xiaomi Mi 11 5G 256GB", "PRDC00318", "blue aqua", 500.00, 9000.00, new DateTime(2023, 7, 31), "produto8.jpg", "produto8.jpg");
-            Product p9 = new Product(9, "Air Fryer Mondial Grand Family 5L", "AFN50BI", "black", 80.00, 470.00, new DateTime(2022, 12, 20), "produto9.jpeg", "produto9.jpeg");
-            Product p10 = new Product(10, "Ar Condicionado Split LG Dual Inverter", "S4W12JARPA", "white", 650.00, 3600.00, new DateTime(2023, 4, 23), "produto10.jpeg", "produto10.jpeg");
-            Product p11 = new Product(11, "Amazon Echo Dot 3ª Ger", "B07PDHSMHP", "black", 100.00, 360.00, new DateTime(2022, 5, 20), "produto11.jpg", "produto11.jpg");
-            Product p12 = new Product(12, "Multifuncional Lexmark MX622adhe", "36S0910", "gray", 650.00, 4900.00, new DateTime(2023, 3, 5), "produto12.png", "produto12.png");
+            Product p1 = new Product(1, "Dell G15 15,6 Notebook", "G5510U6000W", "grey", 800.00, 5700.00, new DateTime(2022, 5, 20), "Images/produto1.jpeg", "produto1.jpeg");
+            Product p2 = new Product(2, "Lavadora de Alta Pressão Electrolux", "EWS31", "yellow", 200.00, 450.00, new DateTime(2022, 2, 10), "Images/produto2.png", "produto2.png");
+            Product p3 = new Product(3, "Xiaomi Mi Smart Band 5", "XMSH10HM", "black", 100.00, 530.00, new DateTime(2023, 7, 1), "Images/produto3.jpg", "produto3.jpg");
+            Product p4 = new Product(4, "Lâmpada Inteligente Xiaomi Yeelight", "white", "MJDPL01YL", 50.00, 140.00, new DateTime(2022, 12, 23), "Images/produto4.jpg", "produto4.jpg");
+            Product p5 = new Product(5, "Playstation 5", "CFI1014A", "white", 500.00, 4200.00, new DateTime(2026, 1, 1), "Images/produto5.jpeg", "produto5.jpeg");
+            Product p6 = new Product(6, "Xbox Series X", "B088GHBH92", "black piano", 400.00, 3800.00, new DateTime(2026, 3, 1), "Images/produto6.jpg", "produto6.jpg");
+            Product p7 = new Product(7, "SmartTV Samsung 50 pol.", "QN50Q60AAGXZD", "black piano", 700.00, 3700.00, new DateTime(2022, 4, 13), "Images/produto7.jpg", "produto7.jpg");
+            Product p8 = new Product(8, "Xiaomi Mi 11 5G 256GB", "PRDC00318", "blue aqua", 500.00, 9000.00, new DateTime(2023, 7, 31), "Images/produto8.jpg", "produto8.jpg");
+            Product p9 = new Product(9, "Air Fryer Mondial Grand Family 5L", "AFN50BI", "black", 80.00, 470.00, new DateTime(2022, 12, 20), "Images/produto9.jpeg", "produto9.jpeg");
+            Product p10 = new Product(10, "Ar Condicionado Split LG Dual Inverter", "S4W12JARPA", "white", 650.00, 3600.00, new DateTime(2023, 4, 23), "Images/produto10.jpeg", "produto10.jpeg");
+            Product p11 = new Product(11, "Amazon Echo Dot 3ª Ger", "B07PDHSMHP", "black", 100.00, 360.00, new DateTime(2022, 5, 20), "Images/produto11.jpg", "produto11.jpg");
+            Product p12 = new Product(12, "Multifuncional Lexmark MX622adhe", "36S0910", "gray", 650.00, 4900.00, new DateTime(2023, 3, 5), "Images/produto12.png", "produto12.png");
 
             SalesOrderDetail i1 = new SalesOrderDetail(1, 2, 5700.00, 570.00, o1, p1);
             SalesOrderDetail i2 = new SalesOrderDetail(2, 3, 9000.00, 900.00, o1, p8);

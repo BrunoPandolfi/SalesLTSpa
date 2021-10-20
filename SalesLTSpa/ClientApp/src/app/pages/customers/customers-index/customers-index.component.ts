@@ -9,7 +9,7 @@ import { CustomerService } from '../customer.service';
 })
 export class CustomersIndexComponent implements OnInit {
 
-  data: any;
+  customers: any;
 
   constructor(private customerService : CustomerService,
     public route: ActivatedRoute,
@@ -20,8 +20,8 @@ export class CustomersIndexComponent implements OnInit {
   }
 
   getCustomers(){
-    this.customerService.updateCustomerList().subscribe( (data: any) =>{
-      this.data = data;
+    this.customerService.updateCustomerList().subscribe( (customersList: any) =>{
+      this.customers = customersList;
     });
   }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomersDetailsComponent } from './customers-details/customers-details.component';
 import { CustomersIndexComponent } from './customers-index/customers-index.component';
+import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 import { FormDataCustomerComponent } from './form-data-customer/form-data-customer.component';
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
     },
     {
       path: 'Delete/:id',
-      component: FormDataCustomerComponent
+      component: DeleteCustomerComponent
     }
   ]}
 ];
