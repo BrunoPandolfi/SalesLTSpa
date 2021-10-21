@@ -1,47 +1,51 @@
 <div class="container">
-    <h2>Pedidos</h2>
-    <ul class="list-group">
-        <li class="list-group-item p-3 mt-2">
-            <div class="row">
-                <div class="col-2 p-3 mt-2">
-                    <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
-                    <span class="ms-3">#125648</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold  mx-3">CLIENTE</h6>
-                    <span class="ms-2 text-uppercase">Alex Green</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold  mx-4">STATUS</h6>
-                    <span class="ms-4 text-uppercase text-info fw-bold status">Elaboração</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-3">DT. COMPRA</h6>
-                    <span class="ms-4">17/10/2021</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-4">TOTAL </h6>
-                    <span>R$ 20.000,00</span>
-                </div>
-                <div class="col-2">
-                    <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
-                        <button type="button" class="btn btn-info btn-sm text-light">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                            Detalhes
-                        </button>
-                        <button type="button" class="btn btn-primary btn-sm text-light mt-2">
-                            <fa-icon [icon]="faPencilAlt"></fa-icon>
-                            Editar
-                        </button>
-                        <button type="button"class="btn btn-danger btn-sm text-light mt-2">
-                            <fa-icon [icon]="faTrash"></fa-icon>
-                            Excluir
-                        </button>
+    <div *ngIf="activatedRoute.children.length === 0" >
+        <h2>Pedidos</h2>
+        <ul class="list-group">
+            <li *ngFor="let sales of salesOrders" class="list-group-item p-3 mt-2">
+                <div class="row">
+                    <div class="col-2 p-3 mt-2">
+                        <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
+                        <span class="ms-3">#{{sales.purchaseOrderNumber}}</span>
+                    </div>
+                    <div class="col-2 mt-2 p-3">
+                        <h6 class="fw-bold  mx-3">CLIENTE</h6>
+                        <span class="ms-2 text-uppercase">{{sales.customer.fullName}}</span>
+                    </div>
+                    <div class="col-2 mt-2 p-3">
+                        <h6 class="fw-bold  mx-4">STATUS</h6>
+                        <span class="ms-4 text-uppercase text-info fw-bold status"
+                            [ngClass]="aplicarCorTextoStatus(sales.status)">{{getTextoStatus(sales.status)}}</span>
+                    </div>
+                    <div class="col-2 mt-2 p-3">
+                        <h6 class="fw-bold mx-3">DT. COMPRA</h6>
+                        <span class="ms-4">{{ sales.orderDate | date : 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="col-2 mt-2 p-3">
+                        <h6 class="fw-bold mx-4">TOTAL </h6>
+                        <span>{{ sales.subTotal + sales.taxAmt | currency : 'BRL'}}</span>
+                    </div>
+                    <div class="col-2">
+                        <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
+                            <button type="button" class="btn btn-info btn-sm text-light"
+                                [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID ]">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                                Detalhes
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm text-light mt-2">
+                                <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                Editar
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm text-light mt-2"
+                                [routerLink]="['/SalesOrder/Delete', sales.salesOrderHeaderID ]">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                                Excluir
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        <li class="list-group-item p-3 mt-2 border">
+            </li>
+            <!--li class="list-group-item p-3 mt-2 border">
             <div class="row">
                 <div class="col-2 p-3 mt-2">
                     <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
@@ -120,6 +124,8 @@
                     </div>
                 </div>
             </div>
-        </li>
-    </ul>
+        </li-->
+        </ul>
+    </div>
+    <router-outlet></router-outlet>
 </div>

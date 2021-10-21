@@ -8,8 +8,8 @@ import { SalesOrderIndexComponent } from './sales-order-index/sales-order-index.
 const routes: Routes = [
   {path: 'SalesOrder', component: SalesOrderIndexComponent, children: [
     {path: 'Create', component: CreateSalesOrderComponent},
-    {path: 'Details', component: SalesOrderDetailsComponent},
-    {path: 'Delete', component: DeleteCustomerComponent}
+    {path: 'Details/:id', component: SalesOrderDetailsComponent},
+    {path: 'Delete/:id', component: DeleteCustomerComponent}
   ]}
 ];
 
