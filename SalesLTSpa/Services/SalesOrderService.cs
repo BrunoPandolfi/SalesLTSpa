@@ -11,7 +11,7 @@ namespace SalesLTSpa.Services
     public class SalesOrderService
     {
         private readonly SalesLTSpaContext _context;
-
+        
         public SalesOrderService(SalesLTSpaContext context)
         {
             _context = context;
@@ -19,14 +19,19 @@ namespace SalesLTSpa.Services
 
         public async Task<List<SalesOrderHeader>> FindAllAsync()
         {
-            return await _context.SalesOrderHeader.Include(x => x.Customer).ToListAsync();
+            return await _context.SalesOrderHeader
+                .Include(x => x.Customer)
+                .ToListAsync();
         }
 
         public async Task<SalesOrderHeader> FindByIdAsync(int id)
         {
             return await _context.SalesOrderHeader
+                .Where(x => x.SalesOrderHeaderID == id)
                 .Include(x => x.Customer)
-                .FirstOrDefaultAsync(obj => obj.SalesOrderHeaderID == id);
+                .Include(x => x.SalesOrderDetails)
+                .ThenInclude(y=> y.Product)
+                .FirstOrDefaultAsync();
         }
 
         public async Task InsertAsync(SalesOrderHeader salesOrder)

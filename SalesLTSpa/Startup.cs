@@ -16,6 +16,7 @@ using SalesLTSpa.Services;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace SalesLTSpa
 {
@@ -32,7 +33,10 @@ namespace SalesLTSpa
         public void ConfigureServices(IServiceCollection services)
         {
             string[] corsOrigins = Configuration.GetSection("AllowedHosts").Get<string[]>();
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddDbContext<SalesLTSpaContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesLTSpaContext"), builder => builder.MigrationsAssembly("SalesLTSpa")));

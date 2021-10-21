@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SalesOrderService } from '../../sales-order.service';
 
 @Component({
   selector: 'app-delete-sales-order',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete-sales-order.component.css']
 })
 export class DeleteSalesOrderComponent implements OnInit {
+  salesOrderId: any;
 
-  constructor() { }
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    private salesOrderService: SalesOrderService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.salesOrderId = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
 }

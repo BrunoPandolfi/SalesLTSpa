@@ -30,4 +30,8 @@ export class SalesOrderService {
     this.getAllSalesOrder();
     return this.salesOrderList.asObservable();
   }
+
+  getSalesOrderById(id){
+    return this.http.get(`${this.rootURL}/SalesOrder/${id}`);
+  }
 }

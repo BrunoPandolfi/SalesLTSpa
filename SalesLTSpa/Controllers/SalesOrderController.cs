@@ -15,7 +15,7 @@ namespace SalesLTSpa.Controllers
     {
         private readonly SalesOrderService _salesOrderService;
 
-        public SalesOrderController (SalesOrderService salesOrderService)
+        public SalesOrderController(SalesOrderService salesOrderService)
         {
             _salesOrderService = salesOrderService;
         }
@@ -25,6 +25,18 @@ namespace SalesLTSpa.Controllers
         public async Task<ActionResult<IEnumerable<SalesOrderHeader>>> GetSalesOrder()
         {
             return await _salesOrderService.FindAllAsync();
+        }
+
+        //GET: api/SalesOrder/4
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SalesOrderHeader>> GetSalesOrder(int id)
+        {
+           if (id == null)
+           {
+                return BadRequest();
+           }
+
+            return await _salesOrderService.FindByIdAsync(id);
         }
     }
 }

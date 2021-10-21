@@ -23,6 +23,7 @@ export class SalesOrderIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.salesOrderService.updateSalesOrderList().subscribe((data: any)=>{
+      console.log(data);
       this.salesOrders = data;
     })
   }

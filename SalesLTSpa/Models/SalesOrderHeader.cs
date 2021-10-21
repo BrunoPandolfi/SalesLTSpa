@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace SalesLTSpa.Models
@@ -25,7 +27,7 @@ namespace SalesLTSpa.Models
         public Customer Customer { get; set; }
         [Display(Name = "Customer")]
         public int CustomerID { get; set; }
-        public ICollection<SalesOrderDetail> SalesOrderDetails = new List<SalesOrderDetail>();
+        public ICollection<SalesOrderDetail> SalesOrderDetails { get; set; } = new List<SalesOrderDetail>();
 
         public SalesOrderHeader()
         {

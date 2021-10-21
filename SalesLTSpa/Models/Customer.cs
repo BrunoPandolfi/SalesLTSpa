@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace SalesLTSpa.Models
@@ -21,7 +23,7 @@ namespace SalesLTSpa.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
-        public ICollection<SalesOrderHeader> salesOrders = new List<SalesOrderHeader>();
+        public ICollection<SalesOrderHeader> salesOrders { get; set; } = new List<SalesOrderHeader>();
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
 
