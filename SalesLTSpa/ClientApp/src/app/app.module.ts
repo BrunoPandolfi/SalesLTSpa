@@ -13,6 +13,7 @@ import { ProductsModule } from './pages/products/products.module';
 
 import ptBr from '@angular/common/locales/pt';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(ptBr);
 
@@ -26,7 +27,8 @@ registerLocaleData(ptBr);
     HeaderModule,
     CustomersModule,
     HomeModule,
-    ProductsModule
+    ProductsModule,
+    FontAwesomeModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue:'pt'},

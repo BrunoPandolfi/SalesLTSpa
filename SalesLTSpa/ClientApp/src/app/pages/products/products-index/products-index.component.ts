@@ -9,7 +9,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductsIndexComponent implements OnInit {
 
-  products: any
+  products: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,
