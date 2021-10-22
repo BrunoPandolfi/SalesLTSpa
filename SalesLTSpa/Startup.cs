@@ -44,6 +44,7 @@ namespace SalesLTSpa
             services.AddScoped<SeedingService>();
             services.AddScoped<ProductService>();
             services.AddScoped<SalesOrderService>();
+            services.AddScoped<CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

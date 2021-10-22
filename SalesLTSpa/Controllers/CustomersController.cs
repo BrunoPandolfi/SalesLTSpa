@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
 using SalesLTSpa.Models;
+using SalesLTSpa.Services;
 
 namespace SalesLTSpa.Controllers
 {
@@ -14,25 +15,30 @@ namespace SalesLTSpa.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly SalesLTSpaContext _context;
+        private readonly CustomerService _customerService;
 
-        public CustomersController(SalesLTSpaContext context)
+        public CustomersController(CustomerService customerService)
         {
-            _context = context;
+            _customerService = customerService;
         }
 
         // GET: api/Customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
         {
-            return await _context.Customer.ToListAsync();
+            return await _customerService.FindAllAsync();
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
+        public async Task<ActionResult<Customer>> GetCustomer(int? id)
         {
-            var customer = await _context.Customer.FindAsync(id);
+            if(id == null)
+            {
+                return BadRequest();
+            }
+
+            var customer = await _customerService.FindByIdAsync(id.Value);
 
             if (customer == null)
             {
@@ -53,22 +59,13 @@ namespace SalesLTSpa.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _customerService.UpdateAsync(customer);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw new Exception("Não foi possível atualizar");
             }
 
             return NoContent();
@@ -80,31 +77,17 @@ namespace SalesLTSpa.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            _context.Customer.Add(customer);
-            await _context.SaveChangesAsync();
-
+            await _customerService.InsertAsync(customer);
+            
             return CreatedAtAction("GetCustomer", new { id = customer.CustomerID }, customer);
         }
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
+        public async Task<ActionResult> DeleteCustomer(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            _context.Customer.Remove(customer);
-            await _context.SaveChangesAsync();
-
-            return customer;
-        }
-
-        private bool CustomerExists(int id)
-        {
-            return _context.Customer.Any(e => e.CustomerID == id);
+            await _customerService.DeleteAsync(id);
+            return RedirectToAction("GetCustomer");
         }
     }
 }

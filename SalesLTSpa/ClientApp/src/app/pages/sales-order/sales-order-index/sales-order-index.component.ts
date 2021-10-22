@@ -52,4 +52,8 @@ export class SalesOrderIndexComponent implements OnInit {
       "text-success" : status === 2
     }
   }
+
+  criarNovoPedido(){
+    this.router.navigate(['Create'], {relativeTo: this.activatedRoute});
+  }
 }

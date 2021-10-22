@@ -1,6 +1,7 @@
 <div class="container">
     <div *ngIf="activatedRoute.children.length === 0" >
         <h2>Pedidos</h2>
+        <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoPedido()">Novo Pedido</button>
         <ul class="list-group">
             <li *ngFor="let sales of salesOrders" class="list-group-item p-3 mt-2">
                 <div class="row">

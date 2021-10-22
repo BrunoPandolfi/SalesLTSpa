@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesLTSpa.Models;
+using SalesLTSpa.Models.ViewModels;
 using SalesLTSpa.Services;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,13 @@ namespace SalesLTSpa.Controllers
     public class SalesOrderController : ControllerBase
     {
         private readonly SalesOrderService _salesOrderService;
-
-        public SalesOrderController(SalesOrderService salesOrderService)
+        private readonly CustomerService _customerService;
+        private readonly ProductService _productService;
+        public SalesOrderController(SalesOrderService salesOrderService, CustomerService customerService, ProductService productService)
         {
             _salesOrderService = salesOrderService;
+            _customerService = customerService;
+            _productService = productService;
         }
 
         //GET: api/SalesOrder
@@ -37,6 +41,19 @@ namespace SalesLTSpa.Controllers
            }
 
             return await _salesOrderService.FindByIdAsync(id);
+        }
+
+        //GET: api/SalesOrder/4
+        [HttpGet("Create")]
+        public async Task<ActionResult<SalesOrderViewModel>> GetSalesOrderViewModel()
+        {
+            var customers = await _customerService.FindAllAsync();
+            var products = await _productService.FindAllAsync();
+            var viewModel = new SalesOrderViewModel { 
+                Customers = customers,
+                Products = products
+            };
+            return viewModel;
         }
     }
 }

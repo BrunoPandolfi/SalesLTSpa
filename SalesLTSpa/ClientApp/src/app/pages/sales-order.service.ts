@@ -34,4 +34,9 @@ export class SalesOrderService {
   getSalesOrderById(id){
     return this.http.get(`${this.rootURL}/SalesOrder/${id}`);
   }
+
+  getSalesOrderForm(){
+    return this.http.get(`${this.rootURL}/SalesOrder/Create`);
+  }
+
 }
