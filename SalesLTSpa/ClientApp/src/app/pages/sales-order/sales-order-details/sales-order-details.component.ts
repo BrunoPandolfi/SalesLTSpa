@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalesOrderService } from '../../sales-order.service';
+import { SalesOrderService } from '../sales-order.service';
 import * as data from  '../../../../assets/config.json';
 
 @Component({
@@ -32,7 +32,7 @@ export class SalesOrderDetailsComponent implements OnInit {
       //console.log(data);
       this.salesOrder = data;
       this.loading = false;
-    })
+    });
   }
 
   calculateTaxAmount(subtotal){

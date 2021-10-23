@@ -46,6 +46,24 @@ namespace SalesLTSpa.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateSalesOrderHeader(SalesOrderHeader salesOrderHeader)
+        {
+            bool hasAny = await _context.SalesOrderHeader.AnyAsync(x => x.SalesOrderHeaderID == salesOrderHeader.SalesOrderHeaderID);
+            if (!hasAny)
+            {
+                throw new ApplicationException("Sales order not found");
+            }
+            try
+            {
+                _context.Update(salesOrderHeader);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception("Not updated sales order");
+            }
+        }
+
 
         public string getLastOrderNumber()
         {

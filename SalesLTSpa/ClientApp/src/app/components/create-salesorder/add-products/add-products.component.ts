@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faMinusCircle, faPlus, faPlusCircle, faPray } from '@fortawesome/free-solid-svg-icons';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AddDiscountComponent } from '../add-discount/add-discount.component';
 @Component({
   selector: 'app-add-products',
   templateUrl: './add-products.component.html',
@@ -14,8 +16,11 @@ export class AddProductsComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faMinusCircle = faMinusCircle;
   faPlus = faPlus;
+  modalRef: BsModalRef;
 
-  constructor() { }
+  constructor(
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -50,7 +55,17 @@ export class AddProductsComponent implements OnInit {
     }
   }
 
-  createSalesOrderDetail(product){
+  addDiscountToProduct(product){
+    this.modalRef = this.modalService.show(AddDiscountComponent, {class: 'modal-lg', initialState: {product: product}});
+    this.modalRef.content.newDiscountPrice.subscribe(res =>{
+      this.createSalesOrderDetail(product, res);
+      this.modalRef.hide();
+    });
+    //this.modalRef.content.product = product;
+  }
+  
+
+  createSalesOrderDetail(product, unitPriceDiscount){
     if(product.OrderQty === 0)
     {
       return;
@@ -63,6 +78,7 @@ export class AddProductsComponent implements OnInit {
     this.salesOrderDetails.push({
       "OrderQty": orderQty,
       "UnitPrice": chooseProduct.listPrice,
+      "UnitPriceDiscount": unitPriceDiscount,
       "ProductID": chooseProduct.productID,
       "Product": chooseProduct
     });

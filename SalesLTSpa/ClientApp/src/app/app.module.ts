@@ -14,6 +14,9 @@ import { SalesOrderModule } from './pages/sales-order/sales-order.module';
 import { AddHeaderComponent } from './components/create-salesorder/add-header/add-header.component';
 import { AddProductsComponent } from './components/create-salesorder/add-products/add-products.component';
 import { ResumeSalesorderComponent } from './components/create-salesorder/resume-salesorder/resume-salesorder.component';
+import { AddDiscountComponent } from './components/create-salesorder/add-discount/add-discount.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule  } from 'ngx-bootstrap/modal';
 
 registerLocaleData(ptBr);
 
@@ -22,6 +25,7 @@ registerLocaleData(ptBr);
     AppComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
@@ -29,7 +33,8 @@ registerLocaleData(ptBr);
     HomeModule,
     ProductsModule,
     FontAwesomeModule,
-    SalesOrderModule
+    SalesOrderModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue:'pt'},

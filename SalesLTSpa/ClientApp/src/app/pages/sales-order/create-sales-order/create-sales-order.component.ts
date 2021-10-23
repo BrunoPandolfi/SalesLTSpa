@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProductsRoutingModule } from '../../products/products-routing.module';
-import { SalesOrderService } from '../../sales-order.service';
+import { SalesOrderService } from '../sales-order.service';
 
 @Component({
   selector: 'app-create-sales-order',

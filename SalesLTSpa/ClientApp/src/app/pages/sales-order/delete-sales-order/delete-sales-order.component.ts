@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SalesOrderService } from '../../sales-order.service';
+import { SalesOrderService } from '../sales-order.service';
 
 @Component({
   selector: 'app-delete-sales-order',

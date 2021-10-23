@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddHeaderComponent } from 'src/app/components/create-salesorder/add-header/add-header.component';
 import { AddProductsComponent } from 'src/app/components/create-salesorder/add-products/add-products.component';
 import { ResumeSalesorderComponent } from 'src/app/components/create-salesorder/resume-salesorder/resume-salesorder.component';
+import { EditSalesOrderComponent } from './edit-sales-order/edit-sales-order.component';
+import { AddDiscountComponent } from 'src/app/components/create-salesorder/add-discount/add-discount.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { ResumeSalesorderComponent } from 'src/app/components/create-salesorder/
     DeleteSalesOrderComponent,
     AddHeaderComponent,
     AddProductsComponent,
-    ResumeSalesorderComponent
+    ResumeSalesorderComponent,
+    EditSalesOrderComponent,
+    AddDiscountComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,11 @@ import { ResumeSalesorderComponent } from 'src/app/components/create-salesorder/
     SalesOrderDetailsComponent,
     SalesOrderIndexComponent,
     DeleteSalesOrderComponent,
-    AddHeaderComponent
+    AddHeaderComponent,
+    AddProductsComponent,
+    ResumeSalesorderComponent,
+    EditSalesOrderComponent,
+    AddDiscountComponent
   ]
 })
 export class SalesOrderModule { }
