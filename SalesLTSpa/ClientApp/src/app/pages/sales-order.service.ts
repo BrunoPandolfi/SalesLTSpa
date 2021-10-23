@@ -39,4 +39,8 @@ export class SalesOrderService {
     return this.http.get(`${this.rootURL}/SalesOrder/Create`);
   }
 
+  postSalesOrder(newSalesOrder){
+    return this.http.post(`${this.rootURL}/SalesOrder/Create`, newSalesOrder);
+  }
+
 }

@@ -43,7 +43,7 @@ namespace SalesLTSpa.Controllers
             return await _salesOrderService.FindByIdAsync(id);
         }
 
-        //GET: api/SalesOrder/4
+        //GET: api/SalesOrder/Create
         [HttpGet("Create")]
         public async Task<ActionResult<SalesOrderViewModel>> GetSalesOrderViewModel()
         {
@@ -55,5 +55,42 @@ namespace SalesLTSpa.Controllers
             };
             return viewModel;
         }
+
+        //POST: api/SalesOrder/Create
+        [HttpPost("Create")]
+        public async Task<ActionResult<SalesOrderViewModel>> PostSalesOrderViewModel([FromBody] SalesOrderViewModel salesOrder)
+        {
+            var customer = await _customerService.FindByIdAsync(salesOrder.SalesOrderHeader.CustomerID);
+            var salesOrderHeader = new SalesOrderHeader
+            {
+                OrderDate = salesOrder.SalesOrderHeader.OrderDate,
+                Status = SaleStatus.Processing,
+                OnlineOrderFlag = salesOrder.SalesOrderHeader.OnlineOrderFlag,
+                PurchaseOrderNumber = salesOrder.SalesOrderHeader.PurchaseOrderNumber,
+                SubTotal = salesOrder.SalesOrderHeader.SubTotal,
+                TaxAmt = salesOrder.SalesOrderHeader.TaxAmt,
+                Comment = salesOrder.SalesOrderHeader.Comment,
+                Customer = customer
+            };
+            var products = new List<Product>();
+            var itemDetails = new List<SalesOrderDetail>();
+
+            await _salesOrderService.InsertAsync(salesOrderHeader);
+
+            foreach(var item in salesOrder.SalesOrderDetails){
+                var product = await _productService.FindByIdAsync(item.ProductID);
+                var salesOrderDetail = new SalesOrderDetail
+                {
+                    OrderQty = item.OrderQty,
+                    UnitPrice = item.UnitPrice,
+                    UnitPriceDiscount = 0,
+                    SalesOrderHeader = salesOrderHeader,
+                    Product = product
+                };
+                await _salesOrderService.InsertSalesDetailAsync(salesOrderDetail);
+            }
+            return RedirectToAction("GetSalesOrder");
+        }
+
     }
 }

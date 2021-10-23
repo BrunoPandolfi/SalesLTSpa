@@ -11,6 +11,9 @@ import ptBr from '@angular/common/locales/pt';
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SalesOrderModule } from './pages/sales-order/sales-order.module';
+import { AddHeaderComponent } from './components/create-salesorder/add-header/add-header.component';
+import { AddProductsComponent } from './components/create-salesorder/add-products/add-products.component';
+import { ResumeSalesorderComponent } from './components/create-salesorder/resume-salesorder/resume-salesorder.component';
 
 registerLocaleData(ptBr);
 

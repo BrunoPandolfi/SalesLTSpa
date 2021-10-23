@@ -10,6 +10,9 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { AddHeaderComponent } from 'src/app/components/create-salesorder/add-header/add-header.component';
+import { AddProductsComponent } from 'src/app/components/create-salesorder/add-products/add-products.component';
+import { ResumeSalesorderComponent } from 'src/app/components/create-salesorder/resume-salesorder/resume-salesorder.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
     CreateSalesOrderComponent,
     SalesOrderDetailsComponent,
     SalesOrderIndexComponent,
-    DeleteSalesOrderComponent
+    DeleteSalesOrderComponent,
+    AddHeaderComponent,
+    AddProductsComponent,
+    ResumeSalesorderComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     CreateSalesOrderComponent,
     SalesOrderDetailsComponent,
     SalesOrderIndexComponent,
-    DeleteSalesOrderComponent
+    DeleteSalesOrderComponent,
+    AddHeaderComponent
   ]
 })
 export class SalesOrderModule { }

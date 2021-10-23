@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faMinusCircle, faPlus, faPlusCircle, faPray } from '@fortawesome/free-solid-svg-icons';
+
 import { ProductsRoutingModule } from '../../products/products-routing.module';
 import { SalesOrderService } from '../../sales-order.service';
 
@@ -11,17 +10,12 @@ import { SalesOrderService } from '../../sales-order.service';
   styleUrls: ['./create-sales-order.component.css']
 })
 export class CreateSalesOrderComponent implements OnInit {
-
-  formSalesOrder: FormGroup;
   customers: any;
   products: any;
   stepOne: boolean;
   stepTwo: boolean;
   stepThree: boolean;
   salesOrderComplete: any;
-  faPlusCircle = faPlusCircle;
-  faMinusCircle = faMinusCircle;
-  faPlus = faPlus;
   salesOrderDetails: any[] = [];
 
 
@@ -29,7 +23,6 @@ export class CreateSalesOrderComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private salesOrderService: SalesOrderService,
     private router: Router,
-    private formBuilder: FormBuilder
   ) { 
     this.stepOne = true;
     this.stepTwo = false;
@@ -37,31 +30,12 @@ export class CreateSalesOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formSalesOrder = this.formBuilder.group({
-      PurchaseOrderNumber: [null],
-      OrderDate: [null],
-      OnlineOrderFlag: ['s'],
-      Comment: [null],
-      CustomerID: [null]
-    });
     this.salesOrderService.getSalesOrderForm().subscribe((data: any)=>{
-      console.log(data.products);
-      //this.formSalesOrder = data;
       this.customers = data.customers;
       this.products = data.products;
       this.salesOrderComplete = data;
       this.products.forEach(v => {v.OrderQty = 0, v.Added = false});
     });
-  }
-
-  onSubmit(){
-    console.log(this.formSalesOrder.value);
-    this.stepOne = false;
-    this.stepTwo = true;
-    var salesOrderHeader = this.formSalesOrder.value;
-    salesOrderHeader.Customer = this.customers[salesOrderHeader.CustomerID-1];
-    this.salesOrderComplete["salesOrderHeader"] = salesOrderHeader;
-    console.log(this.salesOrderComplete);
   }
 
   advanceResume(){
@@ -72,39 +46,9 @@ export class CreateSalesOrderComponent implements OnInit {
     console.log(this.salesOrderComplete);
   }
 
-  getImageServer(imgPath){
-    return `http://localhost:1168/${imgPath}`;
-  }
-
-  addQty (product){
-    product.OrderQty += 1;
-  }
-
-  subQty (product){
-    if (product.OrderQty > 0)
-    {
-      product.OrderQty -= 1;
-    }
-  }
-
-  createSalesOrderDetail(product){
-    if(product.OrderQty === 0)
-    {
-      return;
-    }
-    var orderQty = product.OrderQty;
-    var chooseProduct = product;
-    delete chooseProduct['Added'];
-    delete chooseProduct['OrderQty'];
-
-    this.salesOrderDetails.push({
-      "OrderQty": orderQty,
-      "UnitPrice": chooseProduct.listPrice,
-      "ProductID": chooseProduct.productID,
-      "Product": chooseProduct
-    });
-    product["Added"] = true;
-    console.log(this.salesOrderDetails);
+  backToStepTwo(){
+    this.stepTwo = true;
+    this.stepThree = false;
   }
 
   removeProductItem(index, product)
@@ -116,4 +60,27 @@ export class CreateSalesOrderComponent implements OnInit {
     //console.log(this.products);
   }
 
+  addSalesOrderHeader(event){
+    //console.log(event);
+    this.salesOrderComplete.salesOrderHeader = event;
+    console.log(this.salesOrderComplete);
+    this.stepOne = false;
+    this.stepTwo = true;
+  }
+
+  addSalesOrderDetails(event){
+    this.salesOrderComplete.salesOrderDetails = event;
+    console.log(this.salesOrderComplete);
+    this.stepTwo = false;
+    this.stepThree = true;
+  }
+
+  createNewSalesOrder(event){
+    this.salesOrderComplete = event;
+    console.log(this.salesOrderComplete);
+    this.salesOrderService.postSalesOrder(this.salesOrderComplete).subscribe(()=>{
+      this.salesOrderService.updateSalesOrderList();
+      this.router.navigate(["/SalesOrder"]);
+    });
+  }
 }

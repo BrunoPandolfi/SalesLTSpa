@@ -40,6 +40,13 @@ namespace SalesLTSpa.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task InsertSalesDetailAsync(SalesOrderDetail salesDetail)
+        {
+            _context.Add(salesDetail);
+            await _context.SaveChangesAsync();
+        }
+
+
         public string getLastOrderNumber()
         {
             string lastPurchaseOrderNumber = _context.SalesOrderHeader.OrderBy(salesOrder => salesOrder.OrderDate).Last().PurchaseOrderNumber;
