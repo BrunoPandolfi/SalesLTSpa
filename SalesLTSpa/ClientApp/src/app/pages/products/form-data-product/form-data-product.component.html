@@ -3,8 +3,8 @@
         <h1>Criar Novo Cliente</h1>
         <br/>
         <br/>
-        <form [formGroup]="formProduct" (ngSubmit)="productID ? putProduct() : postProduct()" enctype="multipart/form-data">
-            <div *ngIf="productID">
+        <form [formGroup]="formProduct" (ngSubmit)="product ? putProduct() : postProduct()" enctype="multipart/form-data">
+            <div *ngIf="product">
                 <input type="hidden" formControName="ProductID"/>
             </div>
             <div class="row justify-content-center">

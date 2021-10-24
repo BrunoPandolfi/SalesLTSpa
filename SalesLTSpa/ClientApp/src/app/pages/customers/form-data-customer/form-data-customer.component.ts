@@ -12,21 +12,22 @@ import { CustomerService } from '../customer.service';
 })
 export class FormDataCustomerComponent implements OnInit {
 
-  customerID: any;
+  customer: any;
   formCustomer: FormGroup;
   isSubmitted: boolean;
+  titlePage: string;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     public activatedRoute: ActivatedRoute,
     private customerService: CustomerService
   ) {
-
+      
   }
 
   ngOnInit(): void {
-    this.customerID = this.activatedRoute.snapshot.paramMap.get('id');
-    var customer = {};
+    //this.customerID = this.activatedRoute.snapshot.paramMap.get('id');
+    this.customer = this.activatedRoute.snapshot.data['customer'];
     const pipe = new DatePipe('en-US');
     this.formCustomer = this.formBuilder.group({
       CustomerID: [0],
@@ -36,21 +37,19 @@ export class FormDataCustomerComponent implements OnInit {
       Phone: ['', [Validators.required]],
       BirthDate: ['', [Validators.required]]
     });
-    if (this.customerID) {
-      //console.log(this.customerID);
-      this.customerService.getCustomerById(this.customerID).subscribe((customer: any) => {
-        //console.log(customer);
-        this.formCustomer.setValue({
-          CustomerID: customer.customerID,
-          FirstName: customer.firstName,
-          LastName: customer.lastName,
-          EmailAddress: customer.emailAddress,
-          Phone: customer.phone,
-          BirthDate: pipe.transform(customer.birthDate, 'yyyy-MM-dd')
-        });
-      });
+    if (this.customer !== undefined) {
+      this.titlePage = "Editar dados do cliente";
+      this.formCustomer.setValue({
+        CustomerID: this.customer.customerID,
+        FirstName: this.customer.firstName,
+        LastName: this.customer.lastName,
+        EmailAddress: this.customer.emailAddress,
+        Phone: this.customer.phone,
+        BirthDate: pipe.transform(this.customer.birthDate, 'yyyy-MM-dd')
+      })
     }
     else {
+      this.titlePage = "Criar novo cliente";
       return;
     }
   }
@@ -104,8 +103,8 @@ export class FormDataCustomerComponent implements OnInit {
 
   putCustomer() {
     if (this.formCustomer.valid) {
-      //console.log(this.formCustomer);
-      this.customerService.putCustomer(this.customerID, this.formCustomer.value).subscribe((data) => {
+      var customerID = this.customer.customerID;
+      this.customerService.putCustomer(customerID, this.formCustomer.value).subscribe((data) => {
         //console.log(data);
         this.customerService.updateCustomerList();
         this.router.navigate(['/Customers']);

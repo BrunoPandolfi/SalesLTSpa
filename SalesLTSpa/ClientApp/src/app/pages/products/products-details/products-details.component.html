@@ -25,9 +25,9 @@
                         <dt class="col-6"> DATA DESCONTIN.: </dt>
                         <dd class="col-6">{{product.discontinuedDate | date: 'dd/MM/yyyy'}}</dd>
                     </dl>
-                    <button class="btn btn-info me-2 text-light" [routerLink]="['/Products/Edit', productID ]" >Editar</button>
+                    <button class="btn btn-info me-2 text-light" [routerLink]="['/Products/Edit', product.productID ]" >Editar</button>
                     <button class="btn btn-primary me-2" routerLink="/Products">Voltar</button>
-                    <button class="btn btn-danger me-2" [routerLink]="['/Products/Delete', productID ]">Excluir</button>
+                    <button class="btn btn-danger me-2" [routerLink]="['/Products/Delete', product.productID ]">Excluir</button>
                 </div>
             </div>
         </div>

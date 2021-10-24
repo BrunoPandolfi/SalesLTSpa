@@ -18,6 +18,7 @@ import { AddDiscountComponent } from './components/create-salesorder/add-discoun
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule  } from 'ngx-bootstrap/modal';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 registerLocaleData(ptBr);
 
@@ -28,13 +29,13 @@ registerLocaleData(ptBr);
   imports: [
     ModalModule.forRoot(),
     BrowserModule,
+    CustomersModule,
+    ProductsModule,
+    SalesOrderModule,
     AppRoutingModule,
     HeaderModule,
-    CustomersModule,
     HomeModule,
-    ProductsModule,
     FontAwesomeModule,
-    SalesOrderModule,
     BrowserAnimationsModule
   ],
   providers: [

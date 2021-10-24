@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SalesOrderService } from '../sales-order.service';
-import * as data from  '../../../../assets/config.json';
+import * as data from '../../../../assets/config.json';
 
 @Component({
   selector: 'app-sales-order-details',
@@ -9,7 +9,7 @@ import * as data from  '../../../../assets/config.json';
   styleUrls: ['./sales-order-details.component.css']
 })
 export class SalesOrderDetailsComponent implements OnInit {
-  salesOrderID: any;
+  //salesOrderID: any;
   salesOrder: any;
   loading: boolean;
   readonly rootURL = data.default.api;
@@ -22,44 +22,39 @@ export class SalesOrderDetailsComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private salesOrderService: SalesOrderService,
     private router: Router
-  ) { 
+  ) {
     this.loading = true;
   }
 
   ngOnInit(): void {
-    this.salesOrderID = this.activatedRoute.snapshot.paramMap.get('id');
-    this.salesOrderService.getSalesOrderById(this.salesOrderID).subscribe((data: any) =>{
-      //console.log(data);
-      this.salesOrder = data;
-      this.loading = false;
-    });
+    this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
+    console.log(this.salesOrder);
+    this.loading = false;
   }
 
-  calculateTaxAmount(subtotal){
+  calculateTaxAmount(subtotal) {
     this.taxAmount = subtotal * 0.17
     return this.taxAmount;
   }
 
-  getThumbnailPhoto(imageURL){
+  getThumbnailPhoto(imageURL) {
     return `http://localhost:1168/${imageURL}`;
   }
 
-  getTotalPriceItem (unitPrice, orderQty){
+  getTotalPriceItem(unitPrice, orderQty) {
     console.log(orderQty);
     return unitPrice * orderQty;
   }
 
-  hasDiscount(unitPriceDiscount)
-  {
+  hasDiscount(unitPriceDiscount) {
     return unitPriceDiscount > 0;
   }
 
-  getTotalPriceWithDiscount(unitPrice, orderQty, unitPriceDiscount)
-  {
+  getTotalPriceWithDiscount(unitPrice, orderQty, unitPriceDiscount) {
     return (unitPrice * orderQty) - (unitPriceDiscount * orderQty);
   }
 
-  getSubtotalSalesOrder(salesOrderDetails){
+  getSubtotalSalesOrder(salesOrderDetails) {
     this.subtotal = 0;
     salesOrderDetails.map((item) => {
       this.subtotal += this.getTotalPriceItem(item.unitPrice, item.orderQty);
@@ -67,7 +62,7 @@ export class SalesOrderDetailsComponent implements OnInit {
     return this.subtotal;
   }
 
-  getAllDiscounts(salesOrderDetails){
+  getAllDiscounts(salesOrderDetails) {
     this.totalDiscounts = 0;
     salesOrderDetails.map((item) => {
       this.totalDiscounts += (item.unitPriceDiscount * item.orderQty);

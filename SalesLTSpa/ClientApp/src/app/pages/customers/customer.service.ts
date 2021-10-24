@@ -32,14 +32,14 @@ export class CustomerService {
   }
 
   getCustomerById(id){
-    return this.http.get(`${this.rootURL}/Customers/${id}`);
+    return this.http.get(`${this.rootURL}/Customers/Customer/${id}`);
   }
 
   postCustomer(newCustomer){
-    return this.http.post(`${this.rootURL}/Customers`, newCustomer);
+    return this.http.post(`${this.rootURL}/Customers/Create`, newCustomer);
   }
 
   putCustomer(id, customer){
-    return this.http.put(`${this.rootURL}/Customers/${id}`, customer);
+    return this.http.put(`${this.rootURL}/Customers/Customer/Edit/${id}`, customer);
   }
 }

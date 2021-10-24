@@ -12,7 +12,6 @@ import { SalesOrderService } from '../sales-order.service';
 })
 export class EditSalesOrderComponent implements OnInit {
   loading: boolean;
-  salesOrderID: any;
   salesOrder: any;
   salesOrderForm: FormGroup;
   customers: any;
@@ -31,7 +30,8 @@ export class EditSalesOrderComponent implements OnInit {
   ngOnInit(): void {
     const datePipe = new DatePipe('en-US');
     const currencyPipe = new CurrencyPipe('pt-BR');
-    this.salesOrderID = this.activatedRoute.snapshot.paramMap.get("id");
+    this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
+    console.log(this.salesOrder);
     this.salesOrderForm = this.formBuilder.group({
       SalesOrderHeaderID: [null],
       PurchaseOrderNumber: [null, [Validators.required]],
@@ -43,81 +43,77 @@ export class EditSalesOrderComponent implements OnInit {
       Comment: [null],
       CustomerID: [null]
     });
-    this.salesOrderService.getSalesOrderEdit(this.salesOrderID).subscribe((data: any) => {
-      this.salesOrder = data;
-      this.customers = data.customers;
-      this.products = data.products;
-      this.salesOrderHeader = data.salesOrderHeader;
-      this.salesOrderDetails = this.salesOrderHeader.salesOrderDetails;
-      console.log(this.salesOrder);
-      this.salesOrderForm.setValue({
-        SalesOrderHeaderID: this.salesOrderHeader.salesOrderHeaderID,
-        PurchaseOrderNumber: this.salesOrderHeader.purchaseOrderNumber,
-        Status: this.salesOrderHeader.status.toString(),
-        OrderDate: datePipe.transform(this.salesOrderHeader.orderDate, 'yyyy-MM-dd'),
-        OnlineOrderFlag: 's',
-        SubTotal: this.salesOrderHeader.subTotal.toFixed(2).replace('.', ','),
-        TaxAmt: this.salesOrderHeader.taxAmt.toFixed(2).replace('.', ','),
-        Comment: this.salesOrderHeader.comment,
-        CustomerID: this.salesOrderHeader.customerID
-      });
-      this.loading = false;
-      //this.salesOrderForm.controls.SubTotal.disable();
-      //this.salesOrderForm.controls.TaxAmt.disable();
-    })
-  }
+    this.customers = this.salesOrder.customers;
+    this.products = this.salesOrder.products;
+    //this.salesOrderHeader = this.salesOrder.salesOrderHeader;
+    this.salesOrderDetails = this.salesOrder.salesOrderDetails;
+    console.log(this.salesOrder);
+    this.salesOrderForm.setValue({
+      SalesOrderHeaderID: this.salesOrder.salesOrderHeaderID,
+      PurchaseOrderNumber: this.salesOrder.purchaseOrderNumber,
+      Status: this.salesOrder.status.toString(),
+      OrderDate: datePipe.transform(this.salesOrder.orderDate, 'yyyy-MM-dd'),
+      OnlineOrderFlag: 's',
+      SubTotal: this.salesOrder.subTotal.toFixed(2).replace('.', ','),
+      TaxAmt: this.salesOrder.taxAmt.toFixed(2).replace('.', ','),
+      Comment: this.salesOrder.comment,
+      CustomerID: this.salesOrder.customerID
+    });
+    this.loading = false;
+}
 
 
 
-  updateHeader()
-  {
-    if (this.salesOrderForm.valid) {
-      if (this.salesOrderForm.controls['OnlineOrderFlag'].value === 's') {
-        this.salesOrderForm.patchValue({
-          OnlineOrderFlag: true
-        });
-      }
-      else {
-        this.salesOrderForm.patchValue({
-          OnlineOrderFlag: false
-        });
-      }
+updateHeader()
+{
+  if (this.salesOrderForm.valid) {
+    if (this.salesOrderForm.controls['OnlineOrderFlag'].value === 's') {
       this.salesOrderForm.patchValue({
-        SubTotal: Number.parseFloat(this.salesOrderForm.controls['SubTotal'].value),
-        TaxAmt: Number.parseFloat(this.salesOrderForm.controls['TaxAmt'].value)
-      });
-      this.salesOrderService.putSalesOrderHeader(this.salesOrderID, this.salesOrderForm.value).subscribe((result) => {
-        this.salesOrderService.updateSalesOrderList();
-        this.router.navigate(["/SalesOrder"]);
+        OnlineOrderFlag: true
       });
     }
     else {
-      Object.keys(this.salesOrderForm.controls).forEach(field => {
-        const control = this.salesOrderForm.get(field);
-        control?.markAsDirty();
-        if (control instanceof FormGroup) {
-          this.isValid(control);
-        }
+      this.salesOrderForm.patchValue({
+        OnlineOrderFlag: false
       });
     }
+    this.salesOrderForm.patchValue({
+      SubTotal: Number.parseFloat(this.salesOrderForm.controls['SubTotal'].value),
+      TaxAmt: Number.parseFloat(this.salesOrderForm.controls['TaxAmt'].value)
+    });
+    const salesOrderID = this.salesOrderHeader.salesOrderHeaderID;
+    this.salesOrderService.putSalesOrderHeader(salesOrderID, this.salesOrderForm.value).subscribe((result) => {
+      this.salesOrderService.updateSalesOrderList();
+      this.router.navigate(["/SalesOrder"]);
+    });
   }
+  else {
+    Object.keys(this.salesOrderForm.controls).forEach(field => {
+      const control = this.salesOrderForm.get(field);
+      control?.markAsDirty();
+      if (control instanceof FormGroup) {
+        this.isValid(control);
+      }
+    });
+  }
+}
 
-  isValid(fieldName) {
-    var field = this.salesOrderForm.controls[fieldName];
-    return !field.valid && (field.touched || field.dirty);
-  }
+isValid(fieldName) {
+  var field = this.salesOrderForm.controls[fieldName];
+  return !field.valid && (field.touched || field.dirty);
+}
 
-  getFieldName(field) {
-    var name = "";
-    switch (field) {
-      case 'PurchaseOrderNumber':
-        name = "Numero da ordem de pedido";
-        break;
-      case 'OrderDate':
-        name = 'Data do pedido';
-        break;
-    }
-    return name;
+getFieldName(field) {
+  var name = "";
+  switch (field) {
+    case 'PurchaseOrderNumber':
+      name = "Numero da ordem de pedido";
+      break;
+    case 'OrderDate':
+      name = 'Data do pedido';
+      break;
   }
+  return name;
+}
 
 }

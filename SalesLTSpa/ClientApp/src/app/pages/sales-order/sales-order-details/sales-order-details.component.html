@@ -25,9 +25,9 @@
                     </dl>
                 </div>
                 <div class="d-flex flex-row" style="margin-right: 100px; margin-bottom: 180px;">
-                    <button class="btn btn-link text-decoration-none" [routerLink]="['/SalesOrder/Edit', salesOrderID ]" >Editar</button>
+                    <button class="btn btn-link text-decoration-none" [routerLink]="['/SalesOrder/Edit', salesOrder.salesOrderHeaderID ]" >Editar</button>
                     <button class="btn btn-link text-decoration-none" routerLink="/SalesOrder">Voltar</button>
-                    <button class="btn btn-link text-decoration-none" [routerLink]="['/SalesOrder/Delete', salesOrderID ]">Excluir</button>
+                    <button class="btn btn-link text-decoration-none" [routerLink]="['/SalesOrder/Delete', salesOrder.salesOrderHeaderID ]">Excluir</button>
                 </div>
             </div>
             <div class="p-4">

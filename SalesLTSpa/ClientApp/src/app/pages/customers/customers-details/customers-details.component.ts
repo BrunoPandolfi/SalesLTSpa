@@ -8,8 +8,7 @@ import { CustomerService } from '../customer.service';
   styleUrls: ['./customers-details.component.css']
 })
 export class CustomersDetailsComponent implements OnInit {
-  customerID: any;
-  customerData: any;
+  customer: any;
   loading: boolean;
 
   constructor(
@@ -20,10 +19,7 @@ export class CustomersDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerID = this.activatedRoute.snapshot.paramMap.get('id');
-    this.customerService.getCustomerById(this.customerID).subscribe((data: any) =>{
-      this.customerData = data;
-      this.loading = false;
-    })
+    this.customer = this.activatedRoute.snapshot.data['customer'];
+    this.loading = false;
   }
 }

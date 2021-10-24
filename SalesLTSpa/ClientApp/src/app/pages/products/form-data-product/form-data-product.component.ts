@@ -12,7 +12,7 @@ import { Product } from '../../../../assets/Product';
 })
 export class FormDataProductComponent implements OnInit {
 
-  productID: any;
+  product: any;
   formProduct: FormGroup;
   imgSrc: any;
 
@@ -22,17 +22,12 @@ export class FormDataProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private productService: ProductService,
-    private currencyPipe: CurrencyPipe
   ) {
-    this.currencyPipe = new CurrencyPipe('pt-BR');
   }
 
   ngOnInit(): void {
-    this.productID = this.activatedRoute.snapshot.paramMap.get('id');
-    //var customer = {};
+    this.product = this.activatedRoute.snapshot.data['product'];
     const pipe = new DatePipe('en-US');
-    const reader = new FileReader();
-
 
     this.formProduct = this.formBuilder.group({
       ProductID: [0],
@@ -45,21 +40,19 @@ export class FormDataProductComponent implements OnInit {
       ThumbnailPhoto: [null],
       ThumbnailPhotoName: [null]
     });
-    if (this.productID) {
-      this.productService.getProductById(this.productID).subscribe((product: any) => {
-        this.formProduct.setValue({
-          ProductID: product.productID,
-          Name: product.name,
-          ProductNumber: product.productNumber,
-          Color: product.color,
-          StandardCost: product.standardCost.toFixed(2),
-          ListPrice: product.listPrice.toFixed(2),
-          DiscontinuedDate: pipe.transform(product.discontinuedDate, 'yyyy-MM-dd'),
+    if (this.product !== undefined) {
+         this.formProduct.setValue({
+          ProductID: this.product.productID,
+          Name: this.product.name,
+          ProductNumber: this.product.productNumber,
+          Color: this.product.color,
+          StandardCost: this.product.standardCost.toFixed(2),
+          ListPrice: this.product.listPrice.toFixed(2),
+          DiscontinuedDate: pipe.transform(this.product.discontinuedDate, 'yyyy-MM-dd'),
           ThumbnailPhoto: null,
-          ThumbnailPhotoName: product.thumbnailPhotoName
+          ThumbnailPhotoName: this.product.thumbnailPhotoName
         });
-        this.imgSrc = `http://localhost:1168/${product.thumbnailPhoto}`;
-      });
+        this.imgSrc = `http://localhost:1168/${this.product.thumbnailPhoto}`;
     }
     else {
       this.imgSrc = `http://localhost:1168/Images/notfound.jpg`;
@@ -95,13 +88,14 @@ export class FormDataProductComponent implements OnInit {
 
   putProduct() {
     if(this.formProduct.valid){
+      const productID = this.product.productID;
       this.formProduct.controls['StandardCost'].setValue(
         this.changeCommaToPointer(this.formProduct.controls['StandardCost'].value)
       );
       this.formProduct.controls['ListPrice'].setValue(
         this.changeCommaToPointer(this.formProduct.controls['ListPrice'].value)
       );
-      this.productService.putCustomer(this.productID, this.formProduct.value).subscribe(() => {
+      this.productService.putCustomer(productID, this.formProduct.value).subscribe(() => {
         this.productService.updateProductsList();
         this.router.navigate(['/Products']);
       });

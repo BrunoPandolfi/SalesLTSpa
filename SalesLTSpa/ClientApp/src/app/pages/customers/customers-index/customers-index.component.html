@@ -1,8 +1,11 @@
 <div class="container">
-    <div *ngIf="route.children.length === 0">
+    <div *ngIf="route.children.length === 0" class="d-flex flex-column">
         <h1>Clientes</h1>
         <br />
-        <button type="button" class="btn btn-info text-light" (click)="criarNovoCliente()">Novo Cliente</button>
+        <div>
+            <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoCliente()">Novo Cliente</button>
+        </div>
+        <br />
         <table class="table">
             <thead>
                 <tr>

@@ -29,8 +29,8 @@ namespace SalesLTSpa.Controllers
             return await _customerService.FindAllAsync();
         }
 
-        // GET: api/Customers/5
-        [HttpGet("{id}")]
+        // GET: api/Customers/Customer/5
+        [HttpGet("Customer/{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int? id)
         {
             if(id == null)
@@ -42,16 +42,16 @@ namespace SalesLTSpa.Controllers
 
             if (customer == null)
             {
-                return NotFound();
+                return NotFound("Testando Mensagem Error");
             }
 
             return customer;
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Customers/Customer/Edit/1
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("Customer/Edit/{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
             if (id != customer.CustomerID)
@@ -71,10 +71,10 @@ namespace SalesLTSpa.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        // POST: api/Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
             await _customerService.InsertAsync(customer);
@@ -82,8 +82,8 @@ namespace SalesLTSpa.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.CustomerID }, customer);
         }
 
-        // DELETE: api/Customers/5
-        [HttpDelete("{id}")]
+        // DELETE: api/Customers/Customer/Delete/5
+        [HttpDelete("Customer/Delete/{id}")]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
             await _customerService.DeleteAsync(id);

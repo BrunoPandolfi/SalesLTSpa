@@ -26,7 +26,7 @@ export class ProductService {
   }
 
   getProductById(id){
-    return this.http.get(`${this.rootURL}/Products/${id}`);
+    return this.http.get(`${this.rootURL}/Products/Product/${id}`);
   }
 
   updateProductsList(){
@@ -35,10 +35,10 @@ export class ProductService {
   }
 
   postCustomer(newProduct){
-    return this.http.post(`${this.rootURL}/Products`, newProduct);
+    return this.http.post(`${this.rootURL}/Products/Create`, newProduct);
   }
 
   putCustomer(id, product){
-    return this.http.put(`${this.rootURL}/Products/${id}`, product);
+    return this.http.put(`${this.rootURL}/Products/Product/Edit/${id}`, product);
   }
 }

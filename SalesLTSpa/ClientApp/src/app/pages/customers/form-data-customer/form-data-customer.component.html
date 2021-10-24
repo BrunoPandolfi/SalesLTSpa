@@ -1,9 +1,9 @@
-<h1>Criar Novo Cliente</h1>
+<h1>{{ titlePage }}</h1>
 <br/>
 <div class="row">
     <div class="col-6">
-        <form [formGroup]="formCustomer" (ngSubmit)="customerID ? putCustomer() : postCustomer()">
-            <div *ngIf="customerID">
+        <form [formGroup]="formCustomer" (ngSubmit)="customer ? putCustomer() : postCustomer()">
+            <div *ngIf="customer">
                 <input type="hidden" formControName="CustomerID"/>
             </div>
             <div class="form-group">

@@ -21,11 +21,12 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ProductsRoutingModule,
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    
   ],
   exports: [
     ProductsIndexComponent,

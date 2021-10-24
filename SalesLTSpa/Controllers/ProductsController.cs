@@ -32,15 +32,15 @@ namespace SalesLTSpa.Controllers
             return await _productService.FindAllAsync();
         }
 
-        // GET: api/Products/1
-        [HttpGet("{id}")]
+        // GET: api/Products/Product/1
+        [HttpGet("Product/{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             return await _productService.FindByIdAsync(id);
         }
 
-        // POST: api/Products
-        [HttpPost]
+        // POST: api/Products/Create
+        [HttpPost("Create")]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
             string imagePath = "";
@@ -71,8 +71,8 @@ namespace SalesLTSpa.Controllers
             //return webHostEnvironment.ToString();
         }
 
-        // PUT: api/Products
-        [HttpPut("{id}")]
+        // PUT: api/Products/Product/Edit/5
+        [HttpPut("Product/Edit/{id}")]
         public async Task<ActionResult<Product>> PutProduct([FromBody] Product product)
         {
             string imagePath = "";
