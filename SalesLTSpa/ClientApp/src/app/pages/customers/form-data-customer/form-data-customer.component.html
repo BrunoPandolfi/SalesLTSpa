@@ -9,26 +9,31 @@
             <div class="form-group">
                 <label for="FirstName">Nome</label>
                 <input type="text" class="form-control" id="FirstName" placeholder="Nome" formControlName="FirstName"/>
+                <app-error-message [field]="getFieldName('FirstName')" [error]="isValid('FirstName')"></app-error-message>
             </div>
             <br/>
             <div class="form-group">
                 <label for="LastName">Sobrenome</label>
                 <input type="text" class="form-control" id="LastName" placeholder="Sobrenome" formControlName="LastName"/>
+                <app-error-message [field]="getFieldName('LastName')" [error]="isValid('LastName')"></app-error-message>
             </div>
             <br/>
             <div class="form-group">
                 <label for="EmailAddress">Email</label>
                 <input type="text" class="form-control" id="EmailAddress" placeholder="Email" formControlName="EmailAddress"/>
+                <app-error-message [field]="getFieldName('EmailAddress')" [error]="isValid('EmailAddress')"></app-error-message>
             </div>
             <br/>
             <div class="form-group">
                 <label for="Phone">Telefone</label>
                 <input type="text" class="form-control" id="Phone" placeholder="Telefone" formControlName="Phone"/>
+                <app-error-message [field]="getFieldName('Phone')" [error]="isValid('Phone')"></app-error-message>
             </div>
             <br/>
             <div class="form-group">
                 <label for="BirthDate">Data Nascimento</label>
                 <input type="date" class="form-control" id="BirthDate" placeholder="dd/MM/aaaa" formControlName="BirthDate"/>
+                <app-error-message [field]="getFieldName('BirthDate')" [error]="isValid('BirthDate')"></app-error-message>
             </div>
             <br/>
             <button type="submit" class="btn btn-success">Salvar</button>

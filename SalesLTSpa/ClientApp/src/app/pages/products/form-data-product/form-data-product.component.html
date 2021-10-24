@@ -23,30 +23,37 @@
                     <div class="form-group">
                         <label for="Name">Nome do Produto</label>
                         <input type="text" class="form-control" id="Name" placeholder="Nome do Produto" formControlName="Name"/>
+                        <app-error-message [field]="getFieldName('Name')" [error]="isValid('Name')"></app-error-message>
                     </div>
+                    
                     <br/>
                     <div class="form-group">
                         <label for="ProductNumber">Codigo do Produto</label>
                         <input type="text" class="form-control" id="ProductNumber" placeholder="Codigo do Produto" formControlName="ProductNumber"/>
+                        <app-error-message [field]="getFieldName('ProductNumber')" [error]="isValid('ProductNumber')"></app-error-message>
                     </div>
                     <br/>
                     <div class="form-group">
                         <label for="Color">Cor do produto</label>
                         <input type="text" class="form-control" id="Color" placeholder="Cor do produto" formControlName="Color"/>
+                        <app-error-message [field]="getFieldName('Color')" [error]="isValid('Color')"></app-error-message>
                     </div>
                     <br/>
                     <div class="form-group">
                         <label for="StandardCost">Custo de produção</label>
                         <input type="text" class="form-control" id="StandardCost" placeholder="Custo de produção" formControlName="StandardCost"/>
+                        <app-error-message [field]="getFieldName('StandardCost')" [error]="isValid('StandardCost')"></app-error-message>
                     </div>
                     <br/>
                     <div class="form-group">
                         <label for="ListPrice">Preço de venda</label>
                         <input type="text" class="form-control" id="ListPrice" placeholder="Preço de venda" formControlName="ListPrice"/>
+                        <app-error-message [field]="getFieldName('ListPrice')" [error]="isValid('ListPrice')"></app-error-message>
                     </div>
                     <div class="form-group">
                         <label for="DiscontinuedDate">Data Descontinuação</label>
                         <input type="date" class="form-control" id="DiscontinuedDate" placeholder="dd/MM/yyyy" formControlName="DiscontinuedDate"/>
+                        <app-error-message [field]="getFieldName('DiscontinuedDate')" [error]="isValid('DiscontinuedDate')"></app-error-message>
                     </div>
                 </div>
             </div>

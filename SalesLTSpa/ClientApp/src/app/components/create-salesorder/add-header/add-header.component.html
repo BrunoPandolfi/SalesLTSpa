@@ -1,51 +1,61 @@
-<div *ngIf="show" class="col-12">
-    <br />
-    <br />
-    <br />
-    <h6 class="text-uppercase">Preencha os dados do pedido</h6>
-    <form [formGroup]="formSalesOrder" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="PurchaseOrderNumber">Nome do Produto</label>
-            <input type="text" class="form-control" id="PurchaseOrderNumber" placeholder="Numero do Pedido"
-                formControlName="PurchaseOrderNumber" />
-        </div>
-        <div class="form-group">
-            <label for="OrderDate">Data do Pedido</label>
-            <input type="date" class="form-control" id="OrderDate" placeholder="dd/MM/yyyy"
-                formControlName="OrderDate" />
-        </div>
+<div *ngIf="loading">
+    Carregando formulário...
+</div>
+<div *ngIf="!loading">
+    <div *ngIf="show" class="col-12">
         <br />
-        <div>
-            <h6>Compra Online?</h6>
-            <div class="form-check">
-                <label for="OnlineOrderFlag">
-                    <input type="radio" class="form-check-input me-2" id="OnlineOrderFlag" value="true"
-                        formControlName="OnlineOrderFlag" />
-                    <span>SIM</span>
-                </label>
-                <label for="OnlineOrderFlag">
-                    <input type="radio" class="form-check-input ms-2" id="OnlineOrderFlag" value="false"
-                        formControlName="OnlineOrderFlag" />
-                    <span>NÃO</span>
-                </label>
+        <br />
+        <br />
+        <h6 class="text-uppercase">Preencha os dados do pedido</h6>
+        <form [formGroup]="formSalesOrder" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="PurchaseOrderNumber">Número de ordem do Pedido</label>
+                <input type="text" class="form-control" id="PurchaseOrderNumber" placeholder="Numero do Pedido"
+                    formControlName="PurchaseOrderNumber" />
+                <app-error-message [field]="getFieldName('PurchaseOrderNumber')"
+                    [error]="isValid('PurchaseOrderNumber')"></app-error-message>
             </div>
-        </div>
-        <br />
-        <div class="form-group">
-            <label for="Comment">Comentários</label>
-            <textarea class="form-control" id="Comment" placeholder="Adicione comentários"
-                formControlName="Comment"></textarea>
-        </div>
-        <br />
-        <div class="form-group">
-            <label for="CustomerID">Cliente</label>
-            <select class="form-select" formControlName="CustomerID" id="CustomerID">
-                <option *ngFor="let customer of customers;  let i = index" [value]="customer.customerID" [selected]="i == 0">
-                    {{customer.fullName}}
-                </option>
-            </select>
-        </div>
-        <br />
-        <button type="submit" class="btn btn-primary">Avançar</button>
-    </form>
+            <div class="form-group">
+                <label for="OrderDate">Data do Pedido</label>
+                <input type="date" class="form-control" id="OrderDate" placeholder="dd/MM/yyyy"
+                    formControlName="OrderDate" />
+                <app-error-message [field]="getFieldName('OrderDate')"
+                    [error]="isValid('OrderDate')"></app-error-message>
+            </div>
+            <br />
+            <div>
+                <h6>Compra Online?</h6>
+                <div class="form-check">
+                    <label for="OnlineOrderFlag">
+                        <input type="radio" class="form-check-input me-2" id="OnlineOrderFlag" value="s"
+                            formControlName="OnlineOrderFlag" />
+                        <span>SIM</span>
+                    </label>
+                    <label for="OnlineOrderFlag">
+                        <input type="radio" class="form-check-input ms-2" id="OnlineOrderFlag" value="n"
+                            formControlName="OnlineOrderFlag" />
+                        <span>NÃO</span>
+                    </label>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="Comment">Comentários</label>
+                <textarea class="form-control" id="Comment" placeholder="Adicione comentário"
+                    formControlName="Comment"></textarea>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="CustomerID">Cliente</label>
+                <select class="form-select" formControlName="CustomerID" id="CustomerID">
+                    <option *ngFor="let customer of customers;  let i = index" [value]="customer.customerID">
+                        {{customer.fullName}}
+                    </option>
+                </select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Avançar</button>
+        </form>
+    </div>
+
 </div>

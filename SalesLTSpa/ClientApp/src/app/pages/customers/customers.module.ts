@@ -8,15 +8,23 @@ import { DeleteCustomerComponent } from './delete-customer/delete-customer.compo
 import { FormDataCustomerComponent } from './form-data-customer/form-data-customer.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorMessageComponent } from 'src/app/components/error-message/error-message.component';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 
 @NgModule({
-  declarations: [ CustomersIndexComponent, CustomersDetailsComponent, DeleteCustomerComponent, FormDataCustomerComponent],
+  declarations: [ 
+    CustomersIndexComponent, 
+    CustomersDetailsComponent, 
+    DeleteCustomerComponent, 
+    FormDataCustomerComponent
+  ],
   imports: [
     CommonModule,
     CustomersRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [
     CustomersIndexComponent

@@ -17,6 +17,7 @@ import { ResumeSalesorderComponent } from './components/create-salesorder/resume
 import { AddDiscountComponent } from './components/create-salesorder/add-discount/add-discount.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule  } from 'ngx-bootstrap/modal';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 registerLocaleData(ptBr);
 

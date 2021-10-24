@@ -15,6 +15,7 @@ import { AddProductsComponent } from 'src/app/components/create-salesorder/add-p
 import { ResumeSalesorderComponent } from 'src/app/components/create-salesorder/resume-salesorder/resume-salesorder.component';
 import { EditSalesOrderComponent } from './edit-sales-order/edit-sales-order.component';
 import { AddDiscountComponent } from 'src/app/components/create-salesorder/add-discount/add-discount.component';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AddDiscountComponent } from 'src/app/components/create-salesorder/add-d
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports:[
     CreateSalesOrderComponent,

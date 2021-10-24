@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="row p-5">
-            <app-add-header [show]="stepOne" [customers]="customers" (newSalesOrderHeader)="addSalesOrderHeader($event)"></app-add-header>
+            <app-add-header [show]="stepOne" [customers]="customers" [selection]="firstCustomer" (newSalesOrderHeader)="addSalesOrderHeader($event)"></app-add-header>
             <app-add-products [show]="stepTwo" [products]="products" (newSalesOrderDetails)="addSalesOrderDetails($event)"></app-add-products>
             <app-resume-salesorder [show]="stepThree" 
                 [salesOrderComplete]="salesOrderComplete" 

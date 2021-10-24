@@ -17,6 +17,7 @@ export class CreateSalesOrderComponent implements OnInit {
   stepThree: boolean;
   salesOrderComplete: any;
   salesOrderDetails: any[] = [];
+  firstCustomer: number;
 
 
   constructor(
@@ -35,6 +36,8 @@ export class CreateSalesOrderComponent implements OnInit {
       this.products = data.products;
       this.salesOrderComplete = data;
       this.products.forEach(v => {v.OrderQty = 0, v.Added = false});
+      console.log(this.customers[1].customerID);
+      this.firstCustomer = this.customers[1].customerID;
     });
   }
 

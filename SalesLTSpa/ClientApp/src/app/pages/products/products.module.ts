@@ -9,6 +9,7 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductsRoutingModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [
     ProductsIndexComponent,
