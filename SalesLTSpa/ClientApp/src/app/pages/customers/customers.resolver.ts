@@ -18,7 +18,7 @@ export class CustomersResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const customerID = route.params.id;
-    if (isNaN(+customerID))
+    if (Number.isNaN(customerID))
     {
       return of(null);
     }

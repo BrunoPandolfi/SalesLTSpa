@@ -18,7 +18,7 @@ export class SalesOrderResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const salesOrderHeaderID = route.params.id;
-    if (isNaN(+salesOrderHeaderID))
+    if (Number.isNaN(salesOrderHeaderID))
     {
       return of(null);
     }
