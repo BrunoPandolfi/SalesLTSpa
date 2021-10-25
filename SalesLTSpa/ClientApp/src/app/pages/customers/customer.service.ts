@@ -42,4 +42,8 @@ export class CustomerService {
   putCustomer(id, customer){
     return this.http.put(`${this.rootURL}/Customers/Customer/Edit/${id}`, customer);
   }
+
+  deleteCustomer(id){
+    return this.http.delete(`${this.rootURL}/Customers/Customer/Delete/${id}`)
+  }
 }

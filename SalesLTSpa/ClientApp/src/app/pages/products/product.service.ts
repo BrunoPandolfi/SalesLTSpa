@@ -41,4 +41,8 @@ export class ProductService {
   putCustomer(id, product){
     return this.http.put(`${this.rootURL}/Products/Product/Edit/${id}`, product);
   }
+
+  deleteCustomer(id){
+    return this.http.delete(`${this.rootURL}/Products/Product/Delete/${id}`);
+  }
 }

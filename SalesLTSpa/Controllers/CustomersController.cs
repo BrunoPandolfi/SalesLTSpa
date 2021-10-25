@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
 using SalesLTSpa.Models;
 using SalesLTSpa.Services;
+using SalesLTSpa.Services.Exceptions;
 
 namespace SalesLTSpa.Controllers
 {
@@ -24,7 +25,7 @@ namespace SalesLTSpa.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _customerService.FindAllAsync();
         }
@@ -86,8 +87,16 @@ namespace SalesLTSpa.Controllers
         [HttpDelete("Customer/Delete/{id}")]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
-            await _customerService.DeleteAsync(id);
-            return RedirectToAction("GetCustomer");
+            try
+            {
+                await _customerService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch(IntegrityException e)
+            {
+                var result = StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                return result;
+            }
         }
     }
 }

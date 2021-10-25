@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
 using SalesLTSpa.Models;
+using SalesLTSpa.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,13 +61,14 @@ namespace SalesLTSpa.Services
             }
             try
             {
-                var customer = await _context.Customer.FindAsync(id);
-                _context.Customer.Remove(customer);
-                await _context.SaveChangesAsync();
+                 var customer = await _context.Customer.FindAsync(id);
+                 _context.Customer.Remove(customer);
+                 await _context.SaveChangesAsync();
+                //throw new IntegrityException("Não é possível remover o cliente. Cliente possui pedidos abertos");
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (IntegrityException e)
             {
-                throw new Exception("Not remove customer");
+                throw new IntegrityException(e.Message);
             }
             
         }

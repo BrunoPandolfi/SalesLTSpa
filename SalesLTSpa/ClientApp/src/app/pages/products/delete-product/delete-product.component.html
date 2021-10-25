@@ -1,1 +1,29 @@
-<button class="btn btn-primary me-2" routerLink="/Products">Voltar</button>
+<div class="card">
+    <div class="card-header" style="background-color: white; margin-bottom: 10px;">
+        <h5 class="text-uppercase ms-2 p-2">Excluir Produto</h5>
+    </div>
+    <div class="card-body">
+        <h3 class="d-flex justify-content-center">Você tem certeza que deseja excluir o produto?</h3>
+        <div class="d-flex flex-row p-5">
+            <div class="p-5">
+                <img [src]="imgSrc" class="cover-product" [alt]="imgName" [title]="imgName"/>
+            </div>
+            <div class="p-5 mt-3">
+                <h4 class="text-uppercase">{{product.name}}</h4>
+                <span class="text-black-50 text-uppercase">{{product.productNumber}}</span>
+                <dl class="row mt-5">
+                    <dt class="col-6">COR:</dt>
+                    <dd class="col-6">{{product.color}}</dd>
+                    <dt class="col-6"> CUSTO DE PRODUÇÃO: </dt>
+                    <dd class="col-6">{{product.standardCost | currency: 'BRL'}}</dd>
+                    <dt class="col-6"> PREÇO DE VENDA:</dt>
+                    <dd class="col-6">{{product.listPrice | currency: 'BRL'}}</dd>
+                    <dt class="col-6"> DATA DESCONTIN.: </dt>
+                    <dd class="col-6">{{product.discontinuedDate | date: 'dd/MM/yyyy'}}</dd>
+                </dl>
+                <button class="btn btn-primary me-2" routerLink="/Products">Voltar</button>
+                <button class="btn btn-danger me-2" (click)="deleteProduct()">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
 using SalesLTSpa.Models;
+using SalesLTSpa.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,25 @@ namespace SalesLTSpa.Services
             catch (DbUpdateConcurrencyException e)
             {
                 throw new Exception("Not updated product");
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            bool hasAny = await _context.Product.AnyAsync(x => x.ProductID == id);
+            if (!hasAny)
+            {
+                throw new ApplicationException("Id not found");
+            }
+            try
+            {
+                var product = await _context.Product.FindAsync(id);
+                _context.Product.Remove(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (IntegrityException e)
+            {
+                throw new IntegrityException("Não é possível remover o produco. Produto está incluído em pedidos abertos");
             }
         }
     }

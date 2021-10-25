@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalesLTSpa.Models;
 using SalesLTSpa.Services;
+using SalesLTSpa.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -101,6 +102,22 @@ namespace SalesLTSpa.Controllers
             
             await _productService.UpdateAsync(upProduct);
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, upProduct);
+        }
+
+        // DELETE: api/Products/Product/Delete/5
+        [HttpDelete("Product/Delete/{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                await _productService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch(IntegrityException e)
+            {
+                var result = StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                return result;
+            }
         }
 
         private string SaveImage (string ImgStr, string ImgName)

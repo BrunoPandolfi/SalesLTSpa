@@ -34,10 +34,7 @@ const routes: Routes = [
       },
       component: DeleteProductComponent
     }
-  ]},
-  {
-    path: '', pathMatch: 'full',  redirectTo: 'Products'
-  }
+  ]}
 ];
 
 @NgModule({
