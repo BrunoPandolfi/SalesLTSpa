@@ -66,9 +66,9 @@ namespace SalesLTSpa.Services
                  await _context.SaveChangesAsync();
                 //throw new IntegrityException("Não é possível remover o cliente. Cliente possui pedidos abertos");
             }
-            catch (IntegrityException e)
+            catch (DbUpdateException e)
             {
-                throw new IntegrityException(e.Message);
+                throw new IntegrityException("Não é possivel remover o cliente. Cliente possui pedidos abertos");
             }
             
         }

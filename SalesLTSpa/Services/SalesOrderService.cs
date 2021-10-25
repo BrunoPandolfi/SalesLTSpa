@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesLTSpa.Data;
 using SalesLTSpa.Models;
+using SalesLTSpa.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,27 @@ namespace SalesLTSpa.Services
             catch (DbUpdateConcurrencyException e)
             {
                 throw new Exception("Not updated sales order");
+            }
+        }
+
+        public async Task DeleteSalesOrderAsync(int id)
+        {
+            bool hasAny = await _context.SalesOrderHeader.AnyAsync(x => x.SalesOrderHeaderID == id);
+            if (!hasAny)
+            {
+                throw new ApplicationException("Id not found");
+            }
+            try
+            {
+                var salesOrder = await _context.SalesOrderHeader.FindAsync(id);
+                var salesOrderDetails = await _context.SalesOrderDetail.Where(x => x.SalesOrderHeaderID == id).ToListAsync();
+                _context.SalesOrderDetail.RemoveRange(salesOrderDetails);
+                _context.SalesOrderHeader.Remove(salesOrder);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Não é possível excluir o pedido. Pedido possui items");
             }
         }
 

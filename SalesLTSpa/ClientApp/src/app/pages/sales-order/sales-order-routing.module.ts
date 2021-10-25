@@ -26,7 +26,11 @@ const routes: Routes = [
       component: SalesOrderDetailsComponent
     },
     {
-      path: 'Delete/:id', component: DeleteSalesOrderComponent
+      path: 'Delete/:id',
+      resolve: {
+        salesOrder: SalesOrderResolver
+      },
+      component: DeleteSalesOrderComponent
     }
   ]}
 ];

@@ -19,6 +19,7 @@ export class DeleteCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.customer = this.activatedRoute.snapshot.data['customer'];
+    
   }
 
   deleteCustomer(){

@@ -8,7 +8,7 @@ import { SalesOrderService } from '../sales-order.service';
   styleUrls: ['./delete-sales-order.component.css']
 })
 export class DeleteSalesOrderComponent implements OnInit {
-  salesOrderId: any;
+  salesOrder: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -17,7 +17,20 @@ export class DeleteSalesOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.salesOrderId = this.activatedRoute.snapshot.paramMap.get('id');
+    //this.salesOrderId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
+    console.log(this.salesOrder);
+  }
+
+  deleteSalesOrder(){
+    var salesOrderID = this.salesOrder.salesOrderHeaderID;
+    this.salesOrderService.deleteSalesOrder(salesOrderID).subscribe(()=>{
+      this.salesOrderService.updateSalesOrderList();
+      this.router.navigate(['/SalesOrder']);
+    },
+    error =>{
+      console.log(error);
+    });
   }
 
 }

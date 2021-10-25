@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SalesLTSpa.Models;
 using SalesLTSpa.Models.ViewModels;
 using SalesLTSpa.Services;
+using SalesLTSpa.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,6 +142,22 @@ namespace SalesLTSpa.Controllers
                 await _salesOrderService.InsertSalesDetailAsync(salesOrderDetail);
             }
             return RedirectToAction("GetSalesOrder");
+        }
+
+        // DELETE: api/SalesOrder/Delete/5
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult> DeleteSalesOrder(int id)
+        {
+            try
+            {
+                await _salesOrderService.DeleteSalesOrderAsync(id);
+                return NoContent();
+            }
+            catch (IntegrityException e)
+            {
+                var result = StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+                return result;
+            }
         }
 
     }

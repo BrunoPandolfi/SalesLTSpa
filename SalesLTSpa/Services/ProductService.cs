@@ -65,7 +65,7 @@ namespace SalesLTSpa.Services
                 _context.Product.Remove(product);
                 await _context.SaveChangesAsync();
             }
-            catch (IntegrityException e)
+            catch (DbUpdateException e)
             {
                 throw new IntegrityException("Não é possível remover o produco. Produto está incluído em pedidos abertos");
             }

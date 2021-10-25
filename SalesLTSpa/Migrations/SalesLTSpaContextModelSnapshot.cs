@@ -154,7 +154,7 @@ namespace SalesLTSpa.Migrations
                         .IsRequired();
 
                     b.HasOne("SalesLTSpa.Models.SalesOrderHeader", "SalesOrderHeader")
-                        .WithMany()
+                        .WithMany("SalesOrderDetails")
                         .HasForeignKey("SalesOrderHeaderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -163,7 +163,7 @@ namespace SalesLTSpa.Migrations
             modelBuilder.Entity("SalesLTSpa.Models.SalesOrderHeader", b =>
                 {
                     b.HasOne("SalesLTSpa.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("salesOrders")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

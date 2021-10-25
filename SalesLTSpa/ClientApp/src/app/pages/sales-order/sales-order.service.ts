@@ -51,4 +51,8 @@ export class SalesOrderService {
     return this.http.put(`${this.rootURL}/SalesOrder/Edit/${id}`, newSalesOrderHeader);
   }
 
+  deleteSalesOrder(id){
+    return this.http.delete(`${this.rootURL}/SalesOrder/Delete/${id}`)
+  }
+
 }
