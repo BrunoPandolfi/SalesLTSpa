@@ -92,6 +92,7 @@ namespace SalesLTSpa.Controllers
         public async Task<ActionResult> PutSalesOrderHeader(int id, [FromBody] SalesOrderHeader salesOrderHeader)
         {
             var customer = await _customerService.FindByIdAsync(salesOrderHeader.CustomerID);
+
             var upSalesOrderHeader = new SalesOrderHeader
             {
                 SalesOrderHeaderID = salesOrderHeader.SalesOrderHeaderID,
@@ -104,7 +105,23 @@ namespace SalesLTSpa.Controllers
                 Comment = salesOrderHeader.Comment,
                 Customer = customer
             };
-            await _salesOrderService.UpdateSalesOrderHeader(salesOrderHeader);
+
+            await _salesOrderService.UpdateSalesOrderHeader(upSalesOrderHeader);
+            await _salesOrderService.DeleteAllSalesOrderDetails(id);
+
+            foreach (var item in salesOrderHeader.SalesOrderDetails)
+            {
+                var product = await _productService.FindByIdAsync(item.ProductID);
+                var salesOrderDetail = new SalesOrderDetail
+                {
+                    OrderQty = item.OrderQty,
+                    UnitPrice = item.UnitPrice,
+                    UnitPriceDiscount = item.UnitPriceDiscount,
+                    SalesOrderHeader = upSalesOrderHeader,
+                    Product = product
+                };
+                await _salesOrderService.InsertSalesDetailAsync(salesOrderDetail);
+            }
             return NoContent();
         }
 

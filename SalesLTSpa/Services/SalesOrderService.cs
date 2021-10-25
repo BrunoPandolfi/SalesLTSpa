@@ -21,7 +21,10 @@ namespace SalesLTSpa.Services
         public async Task<List<SalesOrderHeader>> FindAllAsync()
         {
             return await _context.SalesOrderHeader
+                .Include(x => x.SalesOrderDetails)
+                .ThenInclude(y => y.Product)
                 .Include(x => x.Customer)
+                .OrderByDescending(x => x.OrderDate)
                 .ToListAsync();
         }
 
@@ -78,6 +81,25 @@ namespace SalesLTSpa.Services
                 var salesOrderDetails = await _context.SalesOrderDetail.Where(x => x.SalesOrderHeaderID == id).ToListAsync();
                 _context.SalesOrderDetail.RemoveRange(salesOrderDetails);
                 _context.SalesOrderHeader.Remove(salesOrder);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Não é possível excluir o pedido. Pedido possui items");
+            }
+        }
+
+        public async Task DeleteAllSalesOrderDetails(int salesOrderID)
+        {
+            bool hasAny = await _context.SalesOrderDetail.AnyAsync(x => x.SalesOrderHeaderID == salesOrderID);
+            if (!hasAny)
+            {
+                throw new ApplicationException("Sales Order not associate with details");
+            }
+            try
+            {
+                var salesOrderDetails = await _context.SalesOrderDetail.Where(x => x.SalesOrderHeaderID == salesOrderID).ToListAsync();
+                _context.SalesOrderDetail.RemoveRange(salesOrderDetails);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)

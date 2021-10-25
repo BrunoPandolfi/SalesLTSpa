@@ -20,7 +20,7 @@ namespace SalesLTSpa.Services
 
         public async Task<List<Product>> FindAllAsync()
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Product.OrderBy(x => x.Name).ToListAsync();
         }
 
         public async Task<Product> FindByIdAsync(int id)

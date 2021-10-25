@@ -44,6 +44,19 @@ export class SalesOrderIndexComponent implements OnInit {
     return texto;
   }
 
+  getTotalSalerOrder(){
+
+  }
+
+  getAllDiscounts(salesOrder){
+    var salesOrderDetails = salesOrder.salesOrderDetails;
+    var totalDiscount = 0;
+    salesOrderDetails.map((obj)=>{
+      totalDiscount += obj.unitPriceDiscount * obj.orderQty;
+    });
+    return totalDiscount;
+  }
+
   aplicarCorTextoStatus(status)
   {
     return {

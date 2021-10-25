@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-2 mt-2 p-3">
                         <h6 class="fw-bold mx-4">TOTAL </h6>
-                        <span>{{ sales.subTotal + sales.taxAmt | currency : 'BRL'}}</span>
+                        <span>{{ sales.subTotal - getAllDiscounts(sales) + sales.taxAmt | currency : 'BRL'}}</span>
                     </div>
                     <div class="col-2">
                         <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
