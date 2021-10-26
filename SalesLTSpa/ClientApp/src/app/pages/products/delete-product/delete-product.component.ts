@@ -12,11 +12,15 @@ export class DeleteProductComponent implements OnInit {
   product: any;
   imgName: string;
   imgSrc: any;
+  error: boolean;
+  message: string;
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private router: Router
-  ) { }
+  ) { 
+    this.error = false;
+  }
 
   ngOnInit(): void {
     this.product = this.activatedRoute.snapshot.data['product'];
@@ -30,8 +34,9 @@ export class DeleteProductComponent implements OnInit {
       this.productService.updateProductsList();
       this.router.navigate(['/Products']);
     },
-    error =>{
-      console.log(error);
+    erro =>{
+      this.message = erro.error;
+      this.error = true;
     });
   }
 

@@ -28,42 +28,18 @@ export class SalesOrderIndexComponent implements OnInit {
     })
   }
 
-  getTextoStatus (status)
+  getStatusMessage (status)
   {
-    var texto = "";
-    switch (status){
-      case 0:
-        texto = "Em elaboração";
-        break;
-      case 1: 
-        texto = "Aguardando Pagamento";
-        break;
-      case 2: 
-        texto = "Pagamento efetuado";
-    }
-    return texto;
-  }
-
-  getTotalSalerOrder(){
-
+    this.salesOrderService.getStatusMessage(status);
   }
 
   getAllDiscounts(salesOrder){
-    var salesOrderDetails = salesOrder.salesOrderDetails;
-    var totalDiscount = 0;
-    salesOrderDetails.map((obj)=>{
-      totalDiscount += obj.unitPriceDiscount * obj.orderQty;
-    });
-    return totalDiscount;
+    return this.salesOrderService.getAllDiscounts(salesOrder);
   }
 
-  aplicarCorTextoStatus(status)
+  setColorStatus(status)
   {
-    return {
-      "text-info" : status === 0,
-      "text-warning" : status  === 1,
-      "text-success" : status === 2
-    }
+    return this.salesOrderService.getColorStatus(status);
   }
 
   criarNovoPedido(){

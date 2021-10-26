@@ -23,7 +23,7 @@ export class EditSalesOrderComponent implements OnInit {
   imgSrc: any;
   subtotal: any;
   totalDiscounts: any;
-  taxAmount: any;
+  taxAmount: number;
 
   constructor(
     private salesOrderService: SalesOrderService,
@@ -37,7 +37,7 @@ export class EditSalesOrderComponent implements OnInit {
   ngOnInit(): void {
     const datePipe = new DatePipe('en-US');
     this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
-
+    this.taxAmount = this.salesOrder.taxAmt;
     this.salesOrderForm = this.formBuilder.group({
       SalesOrderHeaderID: [null],
       PurchaseOrderNumber: [null],
@@ -90,17 +90,13 @@ export class EditSalesOrderComponent implements OnInit {
     return this.subtotal;
   }
 
-  getAllDiscounts(salesOrderDetails) {
-    this.totalDiscounts = 0;
-    salesOrderDetails.map((item) => {
-      this.totalDiscounts += (item.unitPriceDiscount * item.orderQty);
-    });
-    return this.totalDiscounts;
+  getAllDiscounts(salesOrder) {
+    return this.salesOrderService.getAllDiscounts(salesOrder);
   }
 
   calculateTaxAmount(subtotal) {
-    this.taxAmount = subtotal * 0.17
-    return this.taxAmount;
+    this.taxAmount = this.salesOrderService.calculateTaxAmt(subtotal);
+    console.log(this.taxAmount);
   }
 
   removeSalesDetail(index, salesDetail) {

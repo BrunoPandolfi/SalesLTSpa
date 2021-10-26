@@ -2,6 +2,9 @@
     <div class="card-header" style="background-color: white; margin-bottom: 10px;">
         <h5 class="text-uppercase ms-2 p-2">Excluir Produto</h5>
     </div>
+    <div class="p-3">
+        <app-alert-error [show]="error" [message]="message"></app-alert-error>
+    </div>
     <div class="card-body">
         <h3 class="d-flex justify-content-center">Você tem certeza que deseja excluir o produto?</h3>
         <div class="d-flex flex-row p-5">

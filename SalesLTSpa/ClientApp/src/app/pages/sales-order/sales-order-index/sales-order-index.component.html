@@ -18,7 +18,7 @@
                     <div class="col-2 mt-2 p-3">
                         <h6 class="fw-bold  mx-4">STATUS</h6>
                         <span class="ms-4 text-uppercase text-info fw-bold status"
-                            [ngClass]="aplicarCorTextoStatus(sales.status)">{{getTextoStatus(sales.status)}}</span>
+                            [ngClass]="setColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
                     </div>
                     <div class="col-2 mt-2 p-3">
                         <h6 class="fw-bold mx-3">DT. COMPRA</h6>

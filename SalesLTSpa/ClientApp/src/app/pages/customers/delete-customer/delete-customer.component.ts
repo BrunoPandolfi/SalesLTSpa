@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -10,16 +11,19 @@ import { CustomerService } from '../customer.service';
 export class DeleteCustomerComponent implements OnInit {
 
   customer: any;
+  error: boolean;
+  message: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private customerService: CustomerService,
     private router: Router
-  ) { }
+  ) { 
+    this.error = false;
+  }
 
   ngOnInit(): void {
     this.customer = this.activatedRoute.snapshot.data['customer'];
-    
   }
 
   deleteCustomer(){
@@ -27,8 +31,9 @@ export class DeleteCustomerComponent implements OnInit {
         this.customerService.updateCustomerList();
         this.router.navigate(['/Customers']);
     }, 
-    error =>{
-      console.log(error);
+    erro =>{
+      this.message = erro.error;
+      this.error = true;
     }
     );
   }

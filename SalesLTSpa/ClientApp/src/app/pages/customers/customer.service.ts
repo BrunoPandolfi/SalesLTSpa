@@ -35,6 +35,10 @@ export class CustomerService {
     return this.http.get(`${this.rootURL}/Customers/Customer/${id}`);
   }
 
+  getSalesOrders(customerID){
+    return this.http.get(`${this.rootURL}/Customers/Customer/SalesOrders/${customerID}`);
+  }
+
   postCustomer(newCustomer){
     return this.http.post(`${this.rootURL}/Customers/Create`, newCustomer);
   }

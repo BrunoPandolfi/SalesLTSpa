@@ -29,5 +29,4 @@ export class AddDiscountComponent implements OnInit {
   addProductWithDiscount(){
     this.newDiscountPrice.emit(this.UnitPriceDiscount);
   }
-
 }

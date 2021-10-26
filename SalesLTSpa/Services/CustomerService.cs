@@ -69,8 +69,7 @@ namespace SalesLTSpa.Services
             catch (DbUpdateException e)
             {
                 throw new IntegrityException("Não é possivel remover o cliente. Cliente possui pedidos abertos");
-            }
-            
+            }       
         }
     }
 }

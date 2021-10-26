@@ -16,7 +16,40 @@
             <dt class="col-2">Data Nascimento</dt>
             <dd class="col-10">{{customer.birthDate | date: 'dd/MM/yyyy'}}</dd>
         </dl>
-        <a class="btn btn-primary me-2">Ver Pedidos</a>
-        <a class="btn btn-info" routerLink="/Customers">Voltar</a>
+        <a *ngIf="loadingSales" class="btn btn-primary me-2" (click)="getSalesOrdersCustomer()">Ver Pedidos</a>
+        <a class="btn btn-info text-light" routerLink="/Customers">Voltar</a>
+        
+        <div *ngIf="!loadingSales && salesOrders.length > 0">
+            <hr />
+            <h4>PEDIDOS</h4>
+            <ul class="list-group">
+                <li *ngFor="let sales of salesOrders" class="list-group-item d-flex flex-row mt-2 border">
+                    <div class="d-flex flex-column flex-fill ms-3">
+                        <h6>PEDIDO</h6>
+                        <span>{{sales.purchaseOrderNumber}}</span>
+                    </div>
+                    <div class="d-flex flex-column flex-fill align-items-center me-5">
+                        <h6>STATUS</h6>
+                        <span>Pagamento aprovado</span>
+                    </div>
+                    <div class="d-flex flex-column flex-fill align-items-center">
+                        <h6>DATA</h6>
+                        <span>{{sales.orderDate | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="d-flex flex-column flex-fill align-items-center">
+                        <h6>TOTAL</h6>
+                        <span>{{sales.subTotal | currency: 'BRL'}}</span>
+                    </div>
+                    <div class="mt-2">
+                        <a class="btn btn-primary" [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID]">Ver detalhes</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="!loadingSales && salesOrders.length === 0">
+            <hr />
+            <h4>PEDIDOS</h4>
+            <h6 class="mt-4">Cliente não possui pedidos</h6>
+        </div>  
     </div>
 </div>

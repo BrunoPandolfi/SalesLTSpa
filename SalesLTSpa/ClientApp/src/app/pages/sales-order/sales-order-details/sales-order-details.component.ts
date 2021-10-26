@@ -32,11 +32,6 @@ export class SalesOrderDetailsComponent implements OnInit {
     this.loading = false;
   }
 
-  calculateTaxAmount(subtotal) {
-    this.taxAmount = subtotal * 0.17
-    return this.taxAmount;
-  }
-
   getThumbnailPhoto(imageURL) {
     return `http://localhost:1168/${imageURL}`;
   }
@@ -62,11 +57,7 @@ export class SalesOrderDetailsComponent implements OnInit {
     return this.subtotal;
   }
 
-  getAllDiscounts(salesOrderDetails) {
-    this.totalDiscounts = 0;
-    salesOrderDetails.map((item) => {
-      this.totalDiscounts += (item.unitPriceDiscount * item.orderQty);
-    });
-    return this.totalDiscounts;
+  getAllDiscounts(salesOrder) {
+    return this.salesOrderService.getAllDiscounts(salesOrder)
   }
 }

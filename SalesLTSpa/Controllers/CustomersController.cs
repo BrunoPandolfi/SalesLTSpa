@@ -17,10 +17,12 @@ namespace SalesLTSpa.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly CustomerService _customerService;
+        private readonly SalesOrderService _salesOrderService;
 
-        public CustomersController(CustomerService customerService)
+        public CustomersController(CustomerService customerService, SalesOrderService salesOrderService)
         {
             _customerService = customerService;
+            _salesOrderService = salesOrderService;
         }
 
         // GET: api/Customers
@@ -34,7 +36,7 @@ namespace SalesLTSpa.Controllers
         [HttpGet("Customer/{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return BadRequest();
             }
@@ -47,6 +49,19 @@ namespace SalesLTSpa.Controllers
             }
 
             return customer;
+        }
+
+
+        // GET: api/Customers/Customer/SalesOrders/5
+        [HttpGet("Customer/SalesOrders/{customerID}")]
+        public async Task<IEnumerable<SalesOrderHeader>> getSalesOrdersCustomer(int? customerID)
+        {
+            if (customerID == null)
+            {
+                return (IEnumerable<SalesOrderHeader>)BadRequest();
+            }
+
+            return await _salesOrderService.FindAllByCustomerAsync(customerID.Value);
         }
 
         // PUT: api/Customers/Customer/Edit/1

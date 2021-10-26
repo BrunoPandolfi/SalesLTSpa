@@ -55,4 +55,42 @@ export class SalesOrderService {
     return this.http.delete(`${this.rootURL}/SalesOrder/Delete/${id}`)
   }
 
+  getColorStatus(status){
+    return {
+      "text-info" : status === 0,
+      "text-warning" : status  === 1,
+      "text-success" : status === 2
+    }
+  }
+
+  getStatusMessage(status)
+  {
+    var texto = "";
+    switch (status){
+      case 0:
+        texto = "Em elaboração";
+        break;
+      case 1: 
+        texto = "Aguardando Pagamento";
+        break;
+      case 2: 
+        texto = "Pagamento efetuado";
+    }
+    return texto;
+  }
+
+  getAllDiscounts(salesOrder){
+    var salesOrderDetails = salesOrder.salesOrderDetails;
+    var totalDiscount = 0;
+    salesOrderDetails.map((obj)=>{
+      totalDiscount += obj.unitPriceDiscount * obj.orderQty;
+    });
+    return totalDiscount;
+  }
+
+  calculateTaxAmt(subtotal){
+    var taxAmt = subtotal * 0.17
+    return taxAmt;
+  }
+
 }

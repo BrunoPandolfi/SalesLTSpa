@@ -151,9 +151,9 @@
             </div>
             <div>
                 <h3>{{getSubtotalSalesOrder(salesOrder.salesOrderDetails) | currency: 'BRL'}}</h3>
-                <h3 class="text-danger">(-){{ getAllDiscounts(salesOrder.salesOrderDetails) | currency: 'BRL'}}</h3>
-                <h3>{{calculateTaxAmount(getSubtotalSalesOrder(salesOrder.salesOrderDetails)) | currency: 'BRL'}}</h3>
-                <h3>{{ subtotal + taxAmount - totalDiscounts| currency: 'BRL'}}</h3>
+                <h3 class="text-danger">(-){{ getAllDiscounts(salesOrder) | currency: 'BRL'}}</h3>
+                <h3>{{ taxAmount | currency: 'BRL'}}</h3>
+                <h3>{{ subtotal + taxAmount - getAllDiscounts(salesOrder) | currency: 'BRL'}}</h3>
             </div>
         </div>
     </div>

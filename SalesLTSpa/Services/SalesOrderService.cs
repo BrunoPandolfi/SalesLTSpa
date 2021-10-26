@@ -38,6 +38,15 @@ namespace SalesLTSpa.Services
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<SalesOrderHeader>> FindAllByCustomerAsync(int customerID)
+        {
+            return await _context.SalesOrderHeader
+                .Where(x => x.CustomerID == customerID)
+                .Include(x => x.SalesOrderDetails)
+                .ThenInclude(y => y.Product)
+                .ToListAsync();
+        }
+
         public async Task InsertAsync(SalesOrderHeader salesOrder)
         {
             _context.Add(salesOrder);
