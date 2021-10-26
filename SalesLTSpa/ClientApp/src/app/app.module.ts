@@ -20,12 +20,14 @@ import { ModalModule  } from 'ngx-bootstrap/modal';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { AlertErrorComponent } from './components/alert-error/alert-error.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     ModalModule.forRoot(),

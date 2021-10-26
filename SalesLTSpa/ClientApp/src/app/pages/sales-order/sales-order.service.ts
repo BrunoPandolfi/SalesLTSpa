@@ -93,4 +93,7 @@ export class SalesOrderService {
     return taxAmt;
   }
 
+  getTotalSalesOrder(salesOrder){
+    return salesOrder.subTotal + salesOrder.taxAmt - this.getAllDiscounts(salesOrder);
+  }
 }

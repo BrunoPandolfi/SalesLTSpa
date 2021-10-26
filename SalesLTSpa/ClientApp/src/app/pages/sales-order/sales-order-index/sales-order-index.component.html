@@ -7,7 +7,7 @@
         <ul class="list-group">
             <li *ngFor="let sales of salesOrders" class="list-group-item p-3 mt-2">
                 <div class="row">
-                    <div class="col-2 p-3 mt-2">
+                    <div class="col-2 mt-2">
                         <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
                         <span class="ms-3">#{{sales.purchaseOrderNumber}}</span>
                     </div>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-2 mt-2 p-3">
                         <h6 class="fw-bold  mx-4">STATUS</h6>
-                        <span class="ms-4 text-uppercase text-info fw-bold status"
+                        <span class="ms-4 text-uppercase fw-bold"
                             [ngClass]="setColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
                     </div>
                     <div class="col-2 mt-2 p-3">

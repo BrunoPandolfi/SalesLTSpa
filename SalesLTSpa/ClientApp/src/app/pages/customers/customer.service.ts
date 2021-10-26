@@ -26,6 +26,10 @@ export class CustomerService {
     });
   }
 
+  getAllCustomersAndSalesOrder(){
+    return this.http.get(`${this.rootURL}/Customers/SalesOrders`);
+  }
+
   updateCustomerList(){
     this.getAllCustomers();
     return this.customerList.asObservable();

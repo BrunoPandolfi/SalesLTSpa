@@ -1,1 +1,63 @@
-<p>home works!</p>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-6">
+            <div class="card d-flex flex-column">
+                <div class="d-flex justify-content-center">
+                    <h5 class="mt-3">Últimos pedidos</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li *ngFor="let salesOrder of salesOrdersLimit" class="list-group-item mt-1 border">
+                            <div class="row">
+                                <div class="col-2 d-flex flex-column align-items-center">
+                                    <h6>Pedido</h6>
+                                    <span>#{{salesOrder.purchaseOrderNumber}}</span>
+                                </div>
+                                <div class="col-3 d-flex flex-column align-items-center">
+                                    <h6>Cliente</h6>
+                                    <span>{{salesOrder.customer.fullName}}</span>
+                                </div>
+                                <div class="col-3 d-flex flex-column align-items-center">
+                                    <h6>Data</h6>
+                                    <span>{{salesOrder.orderDate | date: 'dd/MM/yyyy'}}</span>
+                                </div>
+                                <div class="col-4 d-flex flex-column align-items-center">
+                                    <h6>Status</h6>
+                                    <span class="fw-bold" [ngClass]="getColorStatus(salesOrder.status)">
+                                        {{getStatusMessage(salesOrder.status)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <button class="btn btn-outline-dark mt-2" routerLink="/SalesOrder">Ver todos pedidos</button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 justify-content-center">
+            <div class="card d-flex ">
+                <div class="d-flex justify-content-center">
+                    <h5 class="mt-3">Total de pedidos por cliente</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group" id="painel-customers">
+                        <li *ngFor="let customer of customers"class="list-group-item d-flex flex-row p-2">
+                            <div class="d-flex flex-fill flex-column align-items-center">
+                                <h6>Cliente</h6>
+                                <span>{{customer.fullName}}</span>
+                            </div>
+                            <div class="d-flex flex-fill flex-column align-items-center">
+                                <h6>Qtd. pedidos</h6>
+                                <span>{{customer.salesOrders.length}}</span>
+                            </div>
+                            <div class="d-flex flex-fill flex-column align-items-center">
+                                <h6>Total Pedidos</h6>
+                                <span>{{getTotalSalesOrderCustomer(customer.salesOrders) | currency: 'BRL'}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

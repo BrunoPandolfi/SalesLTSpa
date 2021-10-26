@@ -51,6 +51,19 @@ namespace SalesLTSpa.Controllers
             return customer;
         }
 
+        // GET: api/Customers/SalesOrders
+        [HttpGet("SalesOrders")]
+        public async Task<IEnumerable<Customer>> getCustomerAndSalesOrder()
+        {
+            var customers = await _customerService.FindAllAsync();
+            foreach (var customer in customers)
+            {
+                customer.salesOrders = await _salesOrderService.FindAllByCustomerAsync(customer.CustomerID);
+            }
+            return customers;
+        }
+
+
 
         // GET: api/Customers/Customer/SalesOrders/5
         [HttpGet("Customer/SalesOrders/{customerID}")]

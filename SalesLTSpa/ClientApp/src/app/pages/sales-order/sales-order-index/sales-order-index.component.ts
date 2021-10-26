@@ -30,7 +30,8 @@ export class SalesOrderIndexComponent implements OnInit {
 
   getStatusMessage (status)
   {
-    this.salesOrderService.getStatusMessage(status);
+    console.log(status);
+    return this.salesOrderService.getStatusMessage(status);
   }
 
   getAllDiscounts(salesOrder){
@@ -39,6 +40,7 @@ export class SalesOrderIndexComponent implements OnInit {
 
   setColorStatus(status)
   {
+    
     return this.salesOrderService.getColorStatus(status);
   }
 
