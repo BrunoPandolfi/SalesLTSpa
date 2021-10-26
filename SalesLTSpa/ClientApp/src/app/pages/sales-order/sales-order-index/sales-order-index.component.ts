@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPencilAlt, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBoxOpen, faPencilAlt, faPlus, faSearch, faShoppingCart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { SalesOrderService } from '../sales-order.service';
 
 @Component({
@@ -12,7 +12,9 @@ export class SalesOrderIndexComponent implements OnInit {
 
   faSearch = faSearch;
   faPencilAlt = faPencilAlt;
+  faPlus = faPlus;
   faTrash = faTrash;
+  faBoxOpen = faBoxOpen;
   salesOrders: any;
 
   constructor(

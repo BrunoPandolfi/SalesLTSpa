@@ -1,135 +1,66 @@
-<div class="container">
-    <div *ngIf="activatedRoute.children.length === 0" class="d-flex flex-column">
-        <h2>Pedidos</h2>
-        <div>
-            <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoPedido()">Novo Pedido</button>
+<div *ngIf="activatedRoute.children.length === 0" > 
+    <div class="bg-white p-2 border rounded">
+        <div class="p-2 d-flex flex-row">
+            <fa-icon [icon]="faBoxOpen" size="2x"></fa-icon>
+            <h3 class="ms-3">Pedidos</h3>
         </div>
-        <ul class="list-group">
-            <li *ngFor="let sales of salesOrders" class="list-group-item p-3 mt-2">
-                <div class="row">
-                    <div class="col-2 mt-2">
-                        <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
-                        <span class="ms-3">#{{sales.purchaseOrderNumber}}</span>
-                    </div>
-                    <div class="col-2 mt-2 p-3">
-                        <h6 class="fw-bold  mx-3">CLIENTE</h6>
-                        <span class="ms-2 text-uppercase">{{sales.customer.fullName}}</span>
-                    </div>
-                    <div class="col-2 mt-2 p-3">
-                        <h6 class="fw-bold  mx-4">STATUS</h6>
-                        <span class="ms-4 text-uppercase fw-bold"
-                            [ngClass]="setColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
-                    </div>
-                    <div class="col-2 mt-2 p-3">
-                        <h6 class="fw-bold mx-3">DT. COMPRA</h6>
-                        <span class="ms-4">{{ sales.orderDate | date : 'dd/MM/yyyy'}}</span>
-                    </div>
-                    <div class="col-2 mt-2 p-3">
-                        <h6 class="fw-bold mx-4">TOTAL </h6>
-                        <span>{{ sales.subTotal - getAllDiscounts(sales) + sales.taxAmt | currency : 'BRL'}}</span>
-                    </div>
-                    <div class="col-2">
-                        <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
-                            <button type="button" class="btn btn-info btn-sm text-light"
-                                [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID ]">
-                                <fa-icon [icon]="faSearch"></fa-icon>
-                                Detalhes
-                            </button>
-                            <button type="button" class="btn btn-primary btn-sm text-light mt-2"
-                            [routerLink]="['/SalesOrder/Edit', sales.salesOrderHeaderID ]">
-                                <fa-icon [icon]="faPencilAlt"></fa-icon>
-                                Editar
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm text-light mt-2"
-                                [routerLink]="['/SalesOrder/Delete', sales.salesOrderHeaderID ]">
-                                <fa-icon [icon]="faTrash"></fa-icon>
-                                Excluir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <!--li class="list-group-item p-3 mt-2 border">
-            <div class="row">
-                <div class="col-2 p-3 mt-2">
-                    <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
-                    <span class="ms-3">#125765</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-3">CLIENTE</h6>
-                    <span class="ms-2 text-uppercase">Donald Blue</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-5">STATUS</h6>
-                    <span class="text-uppercase text-warning fw-bold status">Aguardando Pagamento</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-3">DT. COMPRA</h6>
-                    <span class="ms-4">16/10/2021</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-4">TOTAL </h6>
-                    <span>R$ 1.000,00</span>
-                </div>
-                <div class="col-2">
-                    <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
-                        <button type="button" class="btn btn-info btn-sm text-light">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                            Detalhes
-                        </button>
-                        <button type="button" class="btn btn-primary btn-sm text-light mt-2">
-                            <fa-icon [icon]="faPencilAlt"></fa-icon>
-                            Editar
-                        </button>
-                        <button type="button"class="btn btn-danger btn-sm text-light mt-2">
-                            <fa-icon [icon]="faTrash"></fa-icon>
-                            Excluir
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item p-3 mt-2 border">
-            <div class="row">
-                <div class="col-2 p-3 mt-2">
-                    <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
-                    <span class="ms-3">#126754</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold  mx-3">CLIENTE</h6>
-                    <span class="ms-2 text-uppercase">Maria Blue</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold  mx-4">STATUS</h6>
-                    <span class="ms-4 text-uppercase text-info fw-bold status">Aprovado</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-3">DT. COMPRA</h6>
-                    <span class="ms-4">20/09/2021</span>
-                </div>
-                <div class="col-2 mt-2 p-3">
-                    <h6 class="fw-bold mx-4">TOTAL </h6>
-                    <span>R$ 3.500,00</span>
-                </div>
-                <div class="col-2">
-                    <div class="d-flex flex-column mt-2 ms-5" style="width: 100px;">
-                        <button type="button" class="btn btn-info btn-sm text-light">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                            Detalhes
-                        </button>
-                        <button type="button" class="btn btn-primary btn-sm text-light mt-2">
-                            <fa-icon [icon]="faPencilAlt"></fa-icon>
-                            Editar
-                        </button>
-                        <button type="button"class="btn btn-danger btn-sm text-light mt-2">
-                            <fa-icon [icon]="faTrash"></fa-icon>
-                            Excluir
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </li-->
-        </ul>
     </div>
-    <router-outlet></router-outlet>
+    <br/>
+    <div class="card">
+        <div class="card-body">
+            <div  class="d-flex flex-column">
+                <div class="mb-2">
+                    <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoPedido()">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                        Novo Pedido
+                    </button>
+                </div>
+                <ul class="list-group">
+                    <li *ngFor="let sales of salesOrders" class="list-group-item mt-1 border">
+                        <div class="row">
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <h6 class="fw-bold mx-2">Nº PEDIDO</h6>
+                                <span>#{{sales.purchaseOrderNumber}}</span>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <h6 class="fw-bold  mx-3">CLIENTE</h6>
+                                <span class="text-uppercase">{{sales.customer.fullName}}</span>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <h6 class="fw-bold  mx-4">STATUS</h6>
+                                <span class="text-uppercase fw-bold"
+                                    [ngClass]="setColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <h6 class="fw-bold mx-3">DT. COMPRA</h6>
+                                <span>{{ sales.orderDate | date : 'dd/MM/yyyy'}}</span>
+                            </div>
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <h6 class="fw-bold mx-4">TOTAL </h6>
+                                <span>{{ sales.subTotal - getAllDiscounts(sales) + sales.taxAmt | currency : 'BRL'}}</span>
+                            </div>
+                            <div class="col-2 d-flex flex-column">
+                                <button type="button" class="btn btn-sm btn-info text-light"
+                                        [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID ]">
+                                        <fa-icon [icon]="faSearch"></fa-icon>
+                                        Detalhes
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-primary mt-1"
+                                    [routerLink]="['/SalesOrder/Edit', sales.salesOrderHeaderID ]">
+                                        <fa-icon [icon]="faPencilAlt"></fa-icon>
+                                        Editar
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger mt-1"
+                                        [routerLink]="['/SalesOrder/Delete', sales.salesOrderHeaderID ]">
+                                        <fa-icon [icon]="faTrash"></fa-icon>
+                                        Excluir
+                                    </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<router-outlet></router-outlet>

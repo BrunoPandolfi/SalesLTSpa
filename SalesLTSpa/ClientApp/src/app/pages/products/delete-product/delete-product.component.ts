@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faMinusSquare } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ProductService } from '../product.service';
 })
 export class DeleteProductComponent implements OnInit {
 
+  faMinusSquare = faMinusSquare;
   product: any;
   imgName: string;
   imgSrc: any;

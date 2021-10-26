@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/components/shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FontAwesomeModule
     
   ],
   exports: [

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { CustomerService } from '../customer.service';
 })
 export class CustomersIndexComponent implements OnInit {
 
+  faUsers = faUsers;
   customers: any;
 
   constructor(private customerService : CustomerService,

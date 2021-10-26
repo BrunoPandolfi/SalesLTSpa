@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { CustomerService } from '../customers/customer.service';
 import { SalesOrderService } from '../sales-order/sales-order.service';
 
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   salesOrdersLimit: any;
   maxNumber = 5;
   customers: any;
+  faBars = faBars;
 
   constructor(
     private salesOrderService: SalesOrderService,

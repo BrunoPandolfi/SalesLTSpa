@@ -1,38 +1,47 @@
 <div class="container">
     <div *ngIf="route.children.length === 0" class="d-flex flex-column">
-        <h1>Clientes</h1>
-        <br />
-        <div>
-            <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoCliente()">Novo Cliente</button>
+        <div class="bg-white p-2 border rounded">
+            <div class="p-2 d-flex flex-row">
+                <fa-icon [icon]="faUsers" size="2x"></fa-icon>
+                <h3 class="ms-3">Clientes</h3>  
+            </div>
         </div>
         <br />
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Data Nascimento</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let customer of customers">
-                    <td>{{customer.fullName}}</td>
-                    <td>{{customer.emailAddress}}</td>
-                    <td>{{customer.phone}}</td>
-                    <td>{{customer.birthDate | date: 'dd/MM/yyyy'}}</td>
-                    <td>
-                        <a [routerLink]="['/Customers/Edit', customer.customerID ]" class="btn btn-sm btn-link mb-3"
-                            style="font-size: 10pt">Editar</a>
-                        <a [routerLink]="['/Customers/Details', customer.customerID ]" class="btn btn-sm btn-link mb-3"
-                            style="font-size: 10pt">Detalhes</a>
-                        <a [routerLink]="['/Customers/Delete', customer.customerID ]" class="btn btn-sm btn-link mb-3"
-                            style="font-size: 10pt">Excluir</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card p-4">
+            <div class="card-body">
+                <div>
+                    <button type="button" class="btn btn-info text-light float-end" (click)="criarNovoCliente()">Novo Cliente</button>
+                </div>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Data Nascimento</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let customer of customers">
+                            <td>{{customer.fullName}}</td>
+                            <td>{{customer.emailAddress}}</td>
+                            <td>{{customer.phone}}</td>
+                            <td>{{customer.birthDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>
+                                <a [routerLink]="['/Customers/Edit', customer.customerID ]" class="btn btn-sm btn-link mb-3"
+                                    style="font-size: 10pt">Editar</a>
+                                <a [routerLink]="['/Customers/Details', customer.customerID ]" class="btn btn-sm btn-link mb-3"
+                                    style="font-size: 10pt">Detalhes</a>
+                                <a [routerLink]="['/Customers/Delete', customer.customerID ]" class="btn btn-sm btn-link mb-3"
+                                    style="font-size: 10pt">Excluir</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <router-outlet></router-outlet>
 </div>

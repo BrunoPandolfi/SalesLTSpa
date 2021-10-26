@@ -1,15 +1,26 @@
+<div class="bg-white p-2 border rounded">
+    <div class="p-2 d-flex flex-row">
+        <fa-icon [icon]="faCartPlus" size="2x"></fa-icon>
+        <h3 class="ms-3">Novo Pedido</h3>
+    </div>
+</div>
+<br/>
 <div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Novo Pedido</h3>
+    <div class="wrapper">
+        <ul class="step-bar">
+            <li [class.active]="stepOne === true || stepTwo === true || stepThree === true ">Dados do pedido</li>
+            <li [class.active]="stepTwo === true || stepThree === true ">Items do pedido</li>
+            <li [class.active]=" stepThree === true">Resumo</li>
+        </ul>
     </div>
     <div class="card-body">
         <div class="row p-5">
-            <app-add-header [show]="stepOne" [customers]="customers" [selection]="firstCustomer" (newSalesOrderHeader)="addSalesOrderHeader($event)"></app-add-header>
-            <app-add-products [show]="stepTwo" [products]="products" (newSalesOrderDetails)="addSalesOrderDetails($event)"></app-add-products>
-            <app-resume-salesorder [show]="stepThree" 
-                [salesOrderComplete]="salesOrderComplete" 
-                (updateProductsItems)="backToStepTwo()"
-                (newSalesOrderComplete)="createNewSalesOrder($event)">
+            <app-add-header [show]="stepOne" [customers]="customers" [selection]="firstCustomer"
+                (newSalesOrderHeader)="addSalesOrderHeader($event)"></app-add-header>
+            <app-add-products [show]="stepTwo" [products]="products" (ToSalesHeader)="backToStepOne()"
+                (newSalesOrderDetails)="addSalesOrderDetails($event)"></app-add-products>
+            <app-resume-salesorder [show]="stepThree" [salesOrderComplete]="salesOrderComplete"
+                (updateProductsItems)="backToStepTwo()" (newSalesOrderComplete)="createNewSalesOrder($event)">
             </app-resume-salesorder>
         </div>
     </div>

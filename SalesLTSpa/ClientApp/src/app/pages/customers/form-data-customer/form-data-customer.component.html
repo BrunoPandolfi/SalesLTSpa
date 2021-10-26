@@ -1,43 +1,56 @@
-<h1>{{ titlePage }}</h1>
-<br/>
-<div class="row">
-    <div class="col-6">
-        <form [formGroup]="formCustomer" (ngSubmit)="customer ? putCustomer() : postCustomer()">
-            <div *ngIf="customer">
-                <input type="hidden" formControName="CustomerID"/>
+<div class="bg-white p-2 border rounded">
+    <div class="p-2 d-flex flex-row">
+        <div *ngIf="!this.customer">
+            <fa-icon [icon]="faUserPlus" size="2x"></fa-icon>
+        </div>
+        <div *ngIf="this.customer">
+            <fa-icon [icon]="faUserEdit" size="2x"></fa-icon>
+        </div>
+        <h3 class="ms-3">{{ titlePage }}</h3>
+    </div>
+</div><br/>
+<div class="card p-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <form [formGroup]="formCustomer" (ngSubmit)="customer ? putCustomer() : postCustomer()">
+                    <div *ngIf="customer">
+                        <input type="hidden" formControName="CustomerID"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="FirstName">Nome</label>
+                        <input type="text" class="form-control" id="FirstName" placeholder="Nome" formControlName="FirstName"/>
+                        <app-error-message [field]="getFieldName('FirstName')" [error]="isValid('FirstName')"></app-error-message>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="LastName">Sobrenome</label>
+                        <input type="text" class="form-control" id="LastName" placeholder="Sobrenome" formControlName="LastName"/>
+                        <app-error-message [field]="getFieldName('LastName')" [error]="isValid('LastName')"></app-error-message>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="EmailAddress">Email</label>
+                        <input type="text" class="form-control" id="EmailAddress" placeholder="Email" formControlName="EmailAddress"/>
+                        <app-error-message [field]="getFieldName('EmailAddress')" [error]="isValid('EmailAddress')"></app-error-message>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="Phone">Telefone</label>
+                        <input type="text" class="form-control" id="Phone" placeholder="Telefone" formControlName="Phone"/>
+                        <app-error-message [field]="getFieldName('Phone')" [error]="isValid('Phone')"></app-error-message>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="BirthDate">Data Nascimento</label>
+                        <input type="date" class="form-control" id="BirthDate" placeholder="dd/MM/aaaa" formControlName="BirthDate"/>
+                        <app-error-message [field]="getFieldName('BirthDate')" [error]="isValid('BirthDate')"></app-error-message>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <button type="button" class="btn btn-info ms-2 text-light" (click)="voltarIndex()">Voltar</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="FirstName">Nome</label>
-                <input type="text" class="form-control" id="FirstName" placeholder="Nome" formControlName="FirstName"/>
-                <app-error-message [field]="getFieldName('FirstName')" [error]="isValid('FirstName')"></app-error-message>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="LastName">Sobrenome</label>
-                <input type="text" class="form-control" id="LastName" placeholder="Sobrenome" formControlName="LastName"/>
-                <app-error-message [field]="getFieldName('LastName')" [error]="isValid('LastName')"></app-error-message>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="EmailAddress">Email</label>
-                <input type="text" class="form-control" id="EmailAddress" placeholder="Email" formControlName="EmailAddress"/>
-                <app-error-message [field]="getFieldName('EmailAddress')" [error]="isValid('EmailAddress')"></app-error-message>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="Phone">Telefone</label>
-                <input type="text" class="form-control" id="Phone" placeholder="Telefone" formControlName="Phone"/>
-                <app-error-message [field]="getFieldName('Phone')" [error]="isValid('Phone')"></app-error-message>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="BirthDate">Data Nascimento</label>
-                <input type="date" class="form-control" id="BirthDate" placeholder="dd/MM/aaaa" formControlName="BirthDate"/>
-                <app-error-message [field]="getFieldName('BirthDate')" [error]="isValid('BirthDate')"></app-error-message>
-            </div>
-            <br/>
-            <button type="submit" class="btn btn-success">Salvar</button>
-            <button type="button" class="btn btn-info ms-2 text-light" (click)="voltarIndex()">Voltar</button>
-        </form>
+        </div>
     </div>
 </div>

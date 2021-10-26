@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../../../../assets/Product';
+import { faEdit, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-form-data-product',
@@ -12,9 +13,12 @@ import { Product } from '../../../../assets/Product';
 })
 export class FormDataProductComponent implements OnInit {
 
+  faPlusSquare = faPlusSquare;
+  faEdit = faEdit;
   product: any;
   formProduct: FormGroup;
   imgSrc: any;
+  titlePage: string;
 
 
   constructor(
@@ -53,9 +57,11 @@ export class FormDataProductComponent implements OnInit {
           ThumbnailPhotoName: this.product.thumbnailPhotoName
         });
         this.imgSrc = `http://localhost:1168/${this.product.thumbnailPhoto}`;
+        this.titlePage = "Editar dados produto";
     }
     else {
       this.imgSrc = `http://localhost:1168/Images/notfound.jpg`;
+      this.titlePage = "Adicionar novo produto";
       return;
     }
 

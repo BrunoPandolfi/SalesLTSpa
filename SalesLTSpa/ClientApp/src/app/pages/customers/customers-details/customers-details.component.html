@@ -1,55 +1,61 @@
 <div *ngIf="loading" class="row">
     <h5>Carregando dados do usuário...</h5>
 </div>
-<div *ngIf="!loading" class="card">
-    <div class="card-header">
-        <h2>Dados do Cliente</h2>
-    </div>
-    <div class="card-body p-4">
-        <dl class="row">
-            <dt class="col-2">Nome Completo</dt>
-            <dd class="col-10">{{customer.fullName}}</dd>
-            <dt class="col-2">Email</dt>
-            <dd class="col-10">{{customer.emailAddress}}</dd>
-            <dt class="col-2">Telefone</dt>
-            <dd class="col-10">{{customer.phone}}</dd>
-            <dt class="col-2">Data Nascimento</dt>
-            <dd class="col-10">{{customer.birthDate | date: 'dd/MM/yyyy'}}</dd>
-        </dl>
-        <a *ngIf="loadingSales" class="btn btn-primary me-2" (click)="getSalesOrdersCustomer()">Ver Pedidos</a>
-        <a class="btn btn-info text-light" routerLink="/Customers">Voltar</a>
-        
-        <div *ngIf="!loadingSales && salesOrders.length > 0">
-            <hr />
-            <h4>PEDIDOS</h4>
-            <ul class="list-group">
-                <li *ngFor="let sales of salesOrders" class="list-group-item d-flex flex-row mt-2 border">
-                    <div class="d-flex flex-column flex-fill ms-3">
-                        <h6>PEDIDO</h6>
-                        <span>{{sales.purchaseOrderNumber}}</span>
-                    </div>
-                    <div class="d-flex flex-column flex-fill align-items-center me-5">
-                        <h6>STATUS</h6>
-                        <span>Pagamento aprovado</span>
-                    </div>
-                    <div class="d-flex flex-column flex-fill align-items-center">
-                        <h6>DATA</h6>
-                        <span>{{sales.orderDate | date: 'dd/MM/yyyy'}}</span>
-                    </div>
-                    <div class="d-flex flex-column flex-fill align-items-center">
-                        <h6>TOTAL</h6>
-                        <span>{{sales.subTotal | currency: 'BRL'}}</span>
-                    </div>
-                    <div class="mt-2">
-                        <a class="btn btn-primary" [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID]">Ver detalhes</a>
-                    </div>
-                </li>
-            </ul>
+<div *ngIf="!loading"> 
+    <div class="bg-white p-2 border rounded">
+        <div class="p-2 d-flex flex-row">
+            <fa-icon [icon]="faPortrait" size="2x"></fa-icon>
+            <h3 class="ms-3">Dados do cliente</h3>  
         </div>
-        <div *ngIf="!loadingSales && salesOrders.length === 0">
-            <hr />
-            <h4>PEDIDOS</h4>
-            <h6 class="mt-4">Cliente não possui pedidos</h6>
-        </div>  
+    </div>
+    <br/>
+    <div class="card p-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-2">Nome Completo</dt>
+                <dd class="col-10">{{customer.fullName}}</dd>
+                <dt class="col-2">Email</dt>
+                <dd class="col-10">{{customer.emailAddress}}</dd>
+                <dt class="col-2">Telefone</dt>
+                <dd class="col-10">{{customer.phone}}</dd>
+                <dt class="col-2">Data Nascimento</dt>
+                <dd class="col-10">{{customer.birthDate | date: 'dd/MM/yyyy'}}</dd>
+            </dl>
+            <a *ngIf="loadingSales" class="btn btn-primary me-2" (click)="getSalesOrdersCustomer()">Ver Pedidos</a>
+            <a class="btn btn-info text-light" routerLink="/Customers">Voltar</a>
+            
+            <div *ngIf="!loadingSales && salesOrders.length > 0">
+                <hr />
+                <h4>PEDIDOS</h4>
+                <ul class="list-group">
+                    <li *ngFor="let sales of salesOrders" class="list-group-item d-flex flex-row mt-2 p-2 border">
+                        <div class="d-flex flex-column flex-fill ms-3">
+                            <h6 class="fw-bold">PEDIDO</h6>
+                            <span>#{{sales.purchaseOrderNumber}}</span>
+                        </div>
+                        <div class="d-flex flex-column flex-fill align-items-center me-5">
+                            <h6 class="fw-bold">STATUS</h6>
+                            <span class="fw-bold" [ngClass]="getColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
+                        </div>
+                        <div class="d-flex flex-column flex-fill align-items-center">
+                            <h6 class="fw-bold">DATA</h6>
+                            <span>{{sales.orderDate | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                        <div class="d-flex flex-column flex-fill align-items-center">
+                            <h6 class="fw-bold">TOTAL</h6>
+                            <span>{{sales.subTotal | currency: 'BRL'}}</span>
+                        </div>
+                        <div class="mt-2">
+                            <a class="btn btn-primary" [routerLink]="['/SalesOrder/Details', sales.salesOrderHeaderID]">Ver detalhes</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="!loadingSales && salesOrders.length === 0">
+                <hr />
+                <h4>PEDIDOS</h4>
+                <h6 class="mt-4">Cliente não possui pedidos</h6>
+            </div>  
+        </div>
     </div>
 </div>

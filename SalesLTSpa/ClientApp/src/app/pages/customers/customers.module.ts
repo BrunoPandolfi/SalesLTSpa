@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorMessageComponent } from 'src/app/components/error-message/error-message.component';
 import { SharedModule } from 'src/app/components/shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
     CustomersRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FontAwesomeModule
   ],
   exports: [
     CustomersIndexComponent

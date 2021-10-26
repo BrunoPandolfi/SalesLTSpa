@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faPortrait } from '@fortawesome/free-solid-svg-icons';
+import { SalesOrderService } from '../../sales-order/sales-order.service';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -8,6 +10,7 @@ import { CustomerService } from '../customer.service';
   styleUrls: ['./customers-details.component.css']
 })
 export class CustomersDetailsComponent implements OnInit {
+  faPortrait = faPortrait;
   customer: any;
   loading: boolean;
   salesOrders: any;
@@ -15,6 +18,7 @@ export class CustomersDetailsComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
+    private salesOrderService: SalesOrderService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { 
@@ -36,6 +40,13 @@ export class CustomersDetailsComponent implements OnInit {
     });
   }
 
+  getStatusMessage(status){
+    return this.salesOrderService.getStatusMessage(status);
+  }
+
+  getColorStatus(status){
+    return this.salesOrderService.getColorStatus(status);
+  }
   /*detailsSalesOrder(id){
     this.router.navigate()
   }*/

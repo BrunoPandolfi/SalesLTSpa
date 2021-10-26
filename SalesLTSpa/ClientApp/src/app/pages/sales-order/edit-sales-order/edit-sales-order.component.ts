@@ -2,7 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faGrinTongueSquint } from '@fortawesome/free-solid-svg-icons';
+import { faGrinTongueSquint, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { CustomerService } from '../../customers/customer.service';
 import { SalesOrderService } from '../sales-order.service';
 
@@ -12,6 +12,7 @@ import { SalesOrderService } from '../sales-order.service';
   styleUrls: ['./edit-sales-order.component.css']
 })
 export class EditSalesOrderComponent implements OnInit {
+  faPencilAlt = faPencilAlt;
   loading: boolean;
   salesOrder: any;
   salesOrderComplete: any;

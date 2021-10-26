@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-products-details',
@@ -7,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./products-details.component.css']
 })
 export class ProductsDetailsComponent implements OnInit {
+  faClipboard = faClipboard;
   product: any;
   imgSrc: string;
   imgName: string;
@@ -22,9 +24,7 @@ export class ProductsDetailsComponent implements OnInit {
     this.product = this.activatedRoute.snapshot.data['product'];
     this.imgSrc = `http://localhost:1168/${this.product.thumbnailPhoto}`;
     this.imgName = this.product.thumbnailPhotoName;
-    setTimeout(()=>{
-      this.loading = false;
-    }, 2000);
+    this.loading = false;
   }
 
 }

@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faUserEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { pipe } from 'rxjs';
 import { CustomerService } from '../customer.service';
 
@@ -12,6 +13,8 @@ import { CustomerService } from '../customer.service';
 })
 export class FormDataCustomerComponent implements OnInit {
 
+  faUserPlus = faUserPlus;
+  faUserEdit = faUserEdit;
   customer: any;
   formCustomer: FormGroup;
   isSubmitted: boolean;

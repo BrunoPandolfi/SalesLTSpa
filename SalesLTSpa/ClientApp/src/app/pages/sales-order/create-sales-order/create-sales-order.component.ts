@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { ProductsRoutingModule } from '../../products/products-routing.module';
 import { SalesOrderService } from '../sales-order.service';
@@ -10,6 +11,7 @@ import { SalesOrderService } from '../sales-order.service';
   styleUrls: ['./create-sales-order.component.css']
 })
 export class CreateSalesOrderComponent implements OnInit {
+  faCartPlus = faCartPlus;
   customers: any;
   products: any;
   stepOne: boolean;
@@ -35,7 +37,7 @@ export class CreateSalesOrderComponent implements OnInit {
       this.customers = data.customers;
       this.products = data.products;
       this.salesOrderComplete = data;
-      this.products.forEach(v => {v.OrderQty = 0, v.Added = false});
+      this.products.forEach(v => {v.OrderQty = 1, v.Added = false});
       console.log(this.customers[1].customerID);
       this.firstCustomer = this.customers[1].customerID;
     });
@@ -47,6 +49,11 @@ export class CreateSalesOrderComponent implements OnInit {
     this.stepThree = true;
     this.salesOrderComplete["salesOrderDetails"] = this.salesOrderDetails;
     console.log(this.salesOrderComplete);
+  }
+
+  backToStepOne(){
+    this.stepTwo = false;
+    this.stepOne = true;
   }
 
   backToStepTwo(){

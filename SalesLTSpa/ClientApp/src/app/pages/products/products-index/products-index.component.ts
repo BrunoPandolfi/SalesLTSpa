@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faBoxes } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../product.service';
+
 
 @Component({
   selector: 'app-products-index',
@@ -10,6 +12,7 @@ import { ProductService } from '../product.service';
 export class ProductsIndexComponent implements OnInit {
 
   products: any;
+  faBoxes = faBoxes;
 
   constructor(
     public activatedRoute: ActivatedRoute,

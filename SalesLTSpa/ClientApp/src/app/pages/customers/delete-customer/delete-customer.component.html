@@ -1,11 +1,15 @@
-<div class="card">
-    <div class="card-header">
-        <h2>Excluir Cliente</h2>
+<div>
+    <app-alert-error [show]="error" [message]="message"></app-alert-error>
+</div>
+<div class="bg-white p-2 border rounded">
+    <div class="p-2 d-flex flex-row">
+        <fa-icon [icon]="faUserMinus" size="2x"></fa-icon>
+        <h3 class="ms-3 mt-1">Excluir Cliente</h3>  
     </div>
-    <div class="p-3">
-        <app-alert-error [show]="error" [message]="message"></app-alert-error>
-    </div>
-    <div class="card-body p-5" style="margin-top: -50px">
+</div>
+<br/>
+<div class="card p-3">
+    <div class="card-body">
         <h4>Você deseja excluir o cliente?</h4>
         <dl class="row">
             <dt class="col-2">Nome Completo</dt>

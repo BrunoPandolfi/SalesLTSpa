@@ -12,6 +12,7 @@ export class AddProductsComponent implements OnInit {
   @Input() show;
   @Input() products;
   @Output() newSalesOrderDetails = new EventEmitter<any[]>();
+  @Output() ToSalesHeader = new EventEmitter();
   salesOrderDetails: any[] = [];
   faPlusCircle = faPlusCircle;
   faMinusCircle = faMinusCircle;
@@ -35,7 +36,7 @@ export class AddProductsComponent implements OnInit {
   removeProductItem(index, product)
   {
     var indexProduct = this.products.findIndex((obj => obj.name === product.name))
-    this.products[indexProduct].OrderQty = 0;
+    this.products[indexProduct].OrderQty = 1;
     this.products[indexProduct].Added = false;
     this.salesOrderDetails.splice(index, 1);
   }
@@ -49,7 +50,7 @@ export class AddProductsComponent implements OnInit {
   }
 
   subQty (product){
-    if (product.OrderQty > 0)
+    if (product.OrderQty > 1)
     {
       product.OrderQty -= 1;
     }
@@ -86,5 +87,9 @@ export class AddProductsComponent implements OnInit {
     console.log(this.salesOrderDetails);
   }
 
+  backToSalesHeader(){
+    console.log("teste")
+    this.ToSalesHeader.emit();
+  }
 
 }

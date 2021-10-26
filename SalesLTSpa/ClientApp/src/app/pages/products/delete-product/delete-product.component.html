@@ -1,10 +1,14 @@
+<div *ngIf="error" class="p-3">
+    <app-alert-error [show]="error" [message]="message"></app-alert-error>
+</div>
+<div class="bg-white p-2 border rounded">
+    <div class="p-2 d-flex flex-row">
+        <fa-icon [icon]="faMinusSquare" size="2x"></fa-icon>
+        <h3 class="ms-3">Excluir do produto</h3>
+    </div>
+</div>
+<br/>
 <div class="card">
-    <div class="card-header" style="background-color: white; margin-bottom: 10px;">
-        <h5 class="text-uppercase ms-2 p-2">Excluir Produto</h5>
-    </div>
-    <div class="p-3">
-        <app-alert-error [show]="error" [message]="message"></app-alert-error>
-    </div>
     <div class="card-body">
         <h3 class="d-flex justify-content-center">Você tem certeza que deseja excluir o produto?</h3>
         <div class="d-flex flex-row p-5">

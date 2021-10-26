@@ -2,7 +2,8 @@
     <h5 class="fw-bold">SELECIONE OS PRODUTOS PARA O PEDIDO</h5>
     <div class="mt-3">
         <h5>RESUMO</h5>
-        <button class="btn btn-info" (click)="sendSalesOrderDetails()">Avançar</button>
+        <button type="button" class="btn btn-info text-light" (click)="sendSalesOrderDetails()">Avançar</button>
+        <button type="button" class="btn btn-primary ms-2" (click)="backToSalesHeader()">Voltar</button>
         <hr/>
         <div *ngIf="salesOrderDetails.length === 0" class="p-5 d-flex justify-content-center align-items-center">
             <span class="fw-bold fs-5">Não existem items de pedido</span>

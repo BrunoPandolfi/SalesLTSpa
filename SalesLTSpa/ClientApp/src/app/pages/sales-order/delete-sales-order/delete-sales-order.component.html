@@ -1,7 +1,11 @@
-<div class="card">
-    <div class="card-header">
-        <h2>Excluir Cliente</h2>
+<div class="bg-white p-2 border rounded">
+    <div class="p-2 d-flex flex-row">
+        <fa-icon [icon]="faTrashAlt" size="2x"></fa-icon>
+        <h3 class="ms-3">Excluir Pedido</h3>
     </div>
+</div>
+<br/>
+<div class="card">
     <div class="card-body p-5">
         <h4>Você deseja excluir o pedido?</h4>
         <dl class="row">
@@ -15,6 +19,6 @@
             <dd class="col-10">{{salesOrder.status}}</dd>
         </dl>
         <a class="btn btn-danger me-2" (click)="deleteSalesOrder()">Excluir</a>
-        <a class="btn btn-info" routerLink="/Customers">Voltar</a>
+        <a class="btn btn-info" routerLink="/SalesOrder">Voltar</a>
     </div>
 </div>
