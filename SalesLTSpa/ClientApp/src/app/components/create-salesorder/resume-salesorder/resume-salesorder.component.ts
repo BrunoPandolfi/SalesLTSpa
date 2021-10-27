@@ -18,7 +18,6 @@ export class ResumeSalesorderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
   }
 
   calculateSubtotal(){
@@ -33,18 +32,14 @@ export class ResumeSalesorderComponent implements OnInit {
     else{
       subTotal = salesOrderDetails[0].UnitPrice * salesOrderDetails[0].OrderQty
     }
-    //console.log("Subtotal: " + subTotal);
     this.salesOrderComplete.salesOrderHeader.SubTotal = subTotal;
-    console.log(this.salesOrderComplete);
     return subTotal;
   }
 
   calculateTaxAmt(){
     var subTotal = this.salesOrderComplete.salesOrderHeader.SubTotal;
-    console.log(subTotal);
     let taxAmt = subTotal * 0.17;
     this.salesOrderComplete.salesOrderHeader.TaxAmt = taxAmt;
-    //console.log(this.salesOrderComplete);
     return taxAmt; 
   }
 

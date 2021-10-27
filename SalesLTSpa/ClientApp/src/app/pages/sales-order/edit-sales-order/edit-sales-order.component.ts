@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faGrinTongueSquint, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../../customers/customer.service';
 import { SalesOrderService } from '../sales-order.service';
 
@@ -25,14 +26,18 @@ export class EditSalesOrderComponent implements OnInit {
   subtotal: any;
   totalDiscounts: any;
   taxAmount: number;
+  error: boolean;
+  message: string;
 
   constructor(
     private salesOrderService: SalesOrderService,
     public activatedRoute: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder, 
+    private toastrService: ToastrService
   ) {
     this.loading = true;
+    this.error = false;
   }
 
   ngOnInit(): void {
@@ -97,7 +102,6 @@ export class EditSalesOrderComponent implements OnInit {
 
   calculateTaxAmount(subtotal) {
     this.taxAmount = this.salesOrderService.calculateTaxAmt(subtotal);
-    console.log(this.taxAmount);
   }
 
   removeSalesDetail(index, salesDetail) {
@@ -109,7 +113,8 @@ export class EditSalesOrderComponent implements OnInit {
       this.updateTaxAmt();
     }
     else{
-      console.log("Não é possível remover o item da lista porque ele é o único");
+      this.error = true;
+      this.message = "Não é possível remover o item da lista porque ele é o único";
     }
 
   }
@@ -125,18 +130,14 @@ export class EditSalesOrderComponent implements OnInit {
     else {
       subTotal = salesOrderDetails[0].UnitPrice * salesOrderDetails[0].OrderQty
     }
-    //console.log("Subtotal: " + subTotal);
     this.salesOrder.SubTotal = subTotal;
-    console.log(this.salesOrder);
     return subTotal;
   }
 
   updateTaxAmt() {
     var subTotal = this.salesOrder.subTotal;
-    //console.log(subTotal);
     let taxAmt = subTotal * 0.17;
     this.salesOrder.taxAmt = taxAmt;
-    //console.log(this.salesOrderComplete);
     return taxAmt;
   }
 
@@ -159,12 +160,12 @@ export class EditSalesOrderComponent implements OnInit {
 
       this.salesOrderComplete = this.salesOrderForm.value;
       this.salesOrderComplete['SalesOrderDetails'] = this.salesOrderDetails;
-      //console.log(this.salesOrderComplete);
       const salesOrderID = this.salesOrderComplete.SalesOrderHeaderID;
 
       this.salesOrderService.putSalesOrderHeader(salesOrderID, this.salesOrderForm.value).subscribe((result) => {
         this.salesOrderService.updateSalesOrderList();
         this.router.navigate(["/SalesOrder"]);
+        this.toastrService.success('Pedido atualizado com sucesso', 'Sucesso');
       });
     }
     else {
@@ -175,6 +176,7 @@ export class EditSalesOrderComponent implements OnInit {
           this.isValid(control);
         }
       });
+      this.toastrService.error('Alguns dados estão faltando', 'Erro');
     }
   }
 

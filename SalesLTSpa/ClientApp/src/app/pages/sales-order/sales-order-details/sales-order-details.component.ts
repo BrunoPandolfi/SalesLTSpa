@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SalesOrderService } from '../sales-order.service';
 import * as data from '../../../../assets/config.json';
+import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sales-order-details',
@@ -9,6 +10,7 @@ import * as data from '../../../../assets/config.json';
   styleUrls: ['./sales-order-details.component.css']
 })
 export class SalesOrderDetailsComponent implements OnInit {
+  faReceipt = faReceipt;
   //salesOrderID: any;
   salesOrder: any;
   loading: boolean;
@@ -28,7 +30,6 @@ export class SalesOrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
-    console.log(this.salesOrder);
     this.loading = false;
   }
 
@@ -37,7 +38,6 @@ export class SalesOrderDetailsComponent implements OnInit {
   }
 
   getTotalPriceItem(unitPrice, orderQty) {
-    console.log(orderQty);
     return unitPrice * orderQty;
   }
 

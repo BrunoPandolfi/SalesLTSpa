@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
-import { Product } from '../../../../assets/Product';
 import { faEdit, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-data-product',
@@ -26,6 +26,7 @@ export class FormDataProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private productService: ProductService,
+    private toastrService: ToastrService
   ) {
   }
 
@@ -79,9 +80,9 @@ export class FormDataProductComponent implements OnInit {
         this.productService.updateProductsList();
         this.router.navigate(['/Products']);
       });
+      this.toastrService.success('Produto adicionado com sucesso', 'Sucesso');
     }
     else {
-      console.log(this.formProduct);
       Object.keys(this.formProduct.controls).forEach(field => {
         const control = this.formProduct.get(field);
         control?.markAsDirty();
@@ -89,6 +90,7 @@ export class FormDataProductComponent implements OnInit {
           this.isValid(control);
         }
       })
+      this.toastrService.error('Alguns dados estão faltando', 'Erro');
     }
   }
 
@@ -105,6 +107,7 @@ export class FormDataProductComponent implements OnInit {
         this.productService.updateProductsList();
         this.router.navigate(['/Products']);
       });
+      this.toastrService.success('Dados do produto atualizados com sucesso', 'Sucesso');
     }
     else{
       Object.keys(this.formProduct.controls).forEach(field => {
@@ -114,6 +117,7 @@ export class FormDataProductComponent implements OnInit {
           this.isValid(control);
         }
       });
+      this.toastrService.error('Alguns dados estão faltando', 'Erro');
     }
   }
 
@@ -122,7 +126,6 @@ export class FormDataProductComponent implements OnInit {
     const [file] = event.target.files;
     this.formProduct.controls['ThumbnailPhotoName'].setValue(file.name);
     reader.readAsDataURL(file);
-    console.log(file);
     reader.onload = () => {
       this.imgSrc = reader.result as string;
       this.formProduct.controls['ThumbnailPhoto'].setValue(file ? reader.result : '', { emitModelToViewChange: false });
@@ -167,6 +170,4 @@ export class FormDataProductComponent implements OnInit {
     let value = valueDouble.replace(/,/g, '.');
     return value;
   }
-
-
 }

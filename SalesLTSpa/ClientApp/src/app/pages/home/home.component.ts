@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../customers/customer.service';
 import { SalesOrderService } from '../sales-order/sales-order.service';
 
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private salesOrderService: SalesOrderService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private toastrService: ToastrService
    
   ) { 
 
@@ -26,13 +28,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.salesOrderService.updateSalesOrderList().subscribe(data=>{
-      console.log(data);
       this.salesOrders = data;
       let arrLength = this.salesOrders.length;
       this.salesOrdersLimit = this.salesOrders.slice(0, this.maxNumber);
     });
     this.customerService.getAllCustomersAndSalesOrder().subscribe(data=>{
-      console.log(data);
       this.customers = data;
     })
   }
@@ -48,10 +48,8 @@ export class HomeComponent implements OnInit {
   getTotalSalesOrderCustomer(salesOrders){
     var totalSalesOrder = 0;
     salesOrders.map((obj)=> {
-      //console.log(obj.subTotal);
       totalSalesOrder += this.salesOrderService.getTotalSalesOrder(obj);
     });
-    //console.log("Total Sales: " + totalSalesOrder);
     return totalSalesOrder;
   }
 }

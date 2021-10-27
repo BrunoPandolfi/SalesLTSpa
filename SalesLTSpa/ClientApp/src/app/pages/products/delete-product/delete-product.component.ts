@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faMinusSquare } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class DeleteProductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { 
     this.error = false;
   }
@@ -35,6 +37,7 @@ export class DeleteProductComponent implements OnInit {
     this.productService.deleteCustomer(productID).subscribe(()=>{
       this.productService.updateProductsList();
       this.router.navigate(['/Products']);
+      this.toastrService.warning('Produto foi excluído do sistema!!', 'Completo');
     },
     erro =>{
       this.message = erro.error;

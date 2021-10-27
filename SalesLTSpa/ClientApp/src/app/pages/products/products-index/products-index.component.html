@@ -13,27 +13,24 @@
             <br />
             <ul class="list-group mt-4">
                 <li *ngFor="let product of products" class="list-group-item mt-2 border">
-                    <div class="row p-3">
-                        <div class="col-1">
-                            <img [src]="createImgPath(product.thumbnailPhoto)" class="cover-product">
+                    <div class="d-flex flex-row p-4">
+                        <div>
+                            <img [src]="createImgPath(product.thumbnailPhoto)" class="thumb-product">
                         </div>
-                        <div class="col-7 px-5 mt-4">
+                        <div class="d-flex flex-column flex-fill ms-5 mt-3">
                             <h5 class="text-uppercase fs-5">{{ product.name }}</h5>
                             <span class="text-black-50">{{ product.productNumber}}</span>
                         </div>
-                        <div class="col-3 mt-3 " style="margin-left: 100px;">
+                        <div class="d-flex flex-column justify-content-around align-items-center">
                             <h2>{{product.listPrice | currency: 'BRL'}}</h2>
-                            <a [routerLink]="['/Products/Edit', product.productID ]" class="btn btn-sm btn-link mb-3"
-                                style="font-size: 10pt">Editar</a>
-                            <a [routerLink]="['/Products/Details', product.productID ]" class="btn btn-sm btn-link mb-3"
-                                style="font-size: 10pt">Detalhes</a>
-                            <a [routerLink]="['/Products/Delete', product.productID ]" class="btn btn-sm btn-link mb-3"
-                                style="font-size: 10pt">Excluir</a>
-                            <!--div style="margin-left: -7px;">
-                            <a class="btn btn-sm btn-link mb-3 text-decoration-none">Editar</a>
-                            <a class="btn btn-sm btn-link mb-3 text-decoration-none">Detalhes</a>
-                            <a class="btn btn-sm btn-link mb-3 text-decoration-none">Excluir</a>
-                        </div-->
+                            <div class="d-flex flex-row">
+                                <a [routerLink]="['/Products/Edit', product.productID ]"
+                                    class="btn btn-sm btn-link">Editar</a>
+                                <a [routerLink]="['/Products/Details', product.productID ]"
+                                    class="btn btn-sm btn-link">Detalhes</a>
+                                <a [routerLink]="['/Products/Delete', product.productID ]"
+                                    class="btn btn-sm btn-link ">Excluir</a>
+                            </div>
                         </div>
                     </div>
                 </li>

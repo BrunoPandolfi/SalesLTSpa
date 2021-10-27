@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-header',
@@ -16,28 +17,27 @@ export class AddHeaderComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
   ) { 
     this.loading = true;
   }
 
   ngOnInit(): void {
+    let customerID = 0;
+    customerID = this.customers[0].customerID;
     this.formSalesOrder = this.formBuilder.group({
       PurchaseOrderNumber: [null, [Validators.required]],
       OrderDate: [null, [Validators.required]],
       OnlineOrderFlag: ['s'],
       Comment: [null],
-      CustomerID: [1]
-    });
-    setTimeout(()=>{
-      console.log(this.selection);
+      CustomerID: [customerID]
     });
     this.loading = false;
   }
 
   onSubmit() {
     if (this.formSalesOrder.valid) {
-      //console.log(this.formSalesOrder.value);
       var salesOrderHeader = this.formSalesOrder.value;
       if (salesOrderHeader.OnlineOrderFlag === 's'){
         salesOrderHeader.OnlineOrderFlag = true;
@@ -45,10 +45,11 @@ export class AddHeaderComponent implements OnInit {
       else {
         salesOrderHeader.OnlineOrderFlag = false;
       }
-      salesOrderHeader.Customer = this.customers[salesOrderHeader.CustomerID - 1];
+      salesOrderHeader.CustomerID = Number.parseInt(salesOrderHeader.CustomerID)
+      let indexCustomer = this.findIndexCustomer(salesOrderHeader.CustomerID);
+      salesOrderHeader.Customer = this.customers[indexCustomer];
       salesOrderHeader.SubTotal = 0.00;
       salesOrderHeader.TaxAmt = 0.00;
-      console.log(salesOrderHeader);
       this.newSalesOrderHeader.emit(salesOrderHeader);
     }
     else{
@@ -59,7 +60,13 @@ export class AddHeaderComponent implements OnInit {
           this.isValid(control);
         }
       })
+      this.toastrService.error('Alguns dados estão faltando!!', 'Erro');
     }
+  }
+
+  findIndexCustomer(customerID){
+    let index =  this.customers.findIndex((customer=> customer.customerID === customerID));
+    return index;
   }
 
   isValid(fieldName) {

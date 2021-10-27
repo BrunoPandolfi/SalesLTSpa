@@ -35,7 +35,6 @@ export class CustomersDetailsComponent implements OnInit {
     let customerID = this.customer.customerID;
     this.customerService.getSalesOrders(customerID).subscribe((data: any)=>{
       this.salesOrders = data;
-      console.log(this.salesOrders);
       this.loadingSales = false;
     });
   }

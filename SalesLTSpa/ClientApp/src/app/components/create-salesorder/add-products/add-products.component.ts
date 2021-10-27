@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faMinusCircle, faPlus, faPlusCircle, faPray } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { AddDiscountComponent } from '../add-discount/add-discount.component';
 @Component({
   selector: 'app-add-products',
@@ -20,7 +21,8 @@ export class AddProductsComponent implements OnInit {
   modalRef: BsModalRef;
 
   constructor(
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,9 @@ export class AddProductsComponent implements OnInit {
     if (this.salesOrderDetails.length > 0)
     {
       this.newSalesOrderDetails.emit(this.salesOrderDetails);
+    }
+    else{
+      this.toastrService.warning('Adicione produtos ao pedido!!', 'Atenção');
     }
   }
   
@@ -62,7 +67,6 @@ export class AddProductsComponent implements OnInit {
       this.createSalesOrderDetail(product, res);
       this.modalRef.hide();
     });
-    //this.modalRef.content.product = product;
   }
   
 
@@ -84,11 +88,9 @@ export class AddProductsComponent implements OnInit {
       "Product": chooseProduct
     });
     product["Added"] = true;
-    console.log(this.salesOrderDetails);
   }
 
   backToSalesHeader(){
-    console.log("teste")
     this.ToSalesHeader.emit();
   }
 

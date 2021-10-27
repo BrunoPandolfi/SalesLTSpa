@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { SalesOrderService } from '../sales-order.service';
 
 @Component({
@@ -15,13 +16,12 @@ export class DeleteSalesOrderComponent implements OnInit {
   constructor(
     public activatedRoute: ActivatedRoute,
     private salesOrderService: SalesOrderService,
+    private toastrService: ToastrService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    //this.salesOrderId = this.activatedRoute.snapshot.paramMap.get('id');
     this.salesOrder = this.activatedRoute.snapshot.data['salesOrder'];
-    console.log(this.salesOrder);
   }
 
   deleteSalesOrder(){
@@ -29,9 +29,7 @@ export class DeleteSalesOrderComponent implements OnInit {
     this.salesOrderService.deleteSalesOrder(salesOrderID).subscribe(()=>{
       this.salesOrderService.updateSalesOrderList();
       this.router.navigate(['/SalesOrder']);
-    },
-    error =>{
-      console.log(error);
+      this.toastrService.warning('Pedido excluído do sistema', 'Completo');
     });
   }
 

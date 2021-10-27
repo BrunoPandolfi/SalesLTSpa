@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label for="CustomerID">Cliente</label>
                 <select class="form-select" formControlName="CustomerID" id="CustomerID">
-                    <option *ngFor="let customer of customers;  let i = index" [value]="customer.customerID">
+                    <option *ngFor="let customer of customers;  let i = index" [ngValue]="customer.customerID">
                         {{customer.fullName}}
                     </option>
                 </select>

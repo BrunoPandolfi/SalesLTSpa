@@ -21,6 +21,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { AlertErrorComponent } from './components/alert-error/alert-error.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(ptBr);
 
@@ -39,7 +40,11 @@ registerLocaleData(ptBr);
     HeaderModule,
     HomeModule,
     FontAwesomeModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      preventDuplicates : true,
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue:'pt'},

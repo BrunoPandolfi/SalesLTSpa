@@ -1,13 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("../node_modules/ngx-toastr/toastr.css");
 body{
     background-color: #f2f2f2;
     font-family: 'Roboto', sans-serif;
 }
 
 .cover-product{
-    width: 100px;
-    width: 100px;
+    object-fit: scale-down;
+    width: 400px;
+    height: 400px;
 }
 
+.thumb-product{
+    object-fit: contain;
+    width: 100px;
+    height: 100px;
+}

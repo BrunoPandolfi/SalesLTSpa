@@ -15,7 +15,7 @@
     </div>
     <div class="card-body">
         <div class="row p-5">
-            <app-add-header [show]="stepOne" [customers]="customers" [selection]="firstCustomer"
+            <app-add-header *ngIf="customers" [show]="stepOne" [customers]="customers" [selection]="firstCustomer"
                 (newSalesOrderHeader)="addSalesOrderHeader($event)"></app-add-header>
             <app-add-products [show]="stepTwo" [products]="products" (ToSalesHeader)="backToStepOne()"
                 (newSalesOrderDetails)="addSalesOrderDetails($event)"></app-add-products>

@@ -22,7 +22,6 @@ export class ProductsIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.updateProductsList().subscribe((productsList: any)=>{
-      //console.log(products);
       this.products = productsList;
     });
   }

@@ -23,20 +23,20 @@
                                 <span>#{{sales.purchaseOrderNumber}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                <h6 class="fw-bold  mx-3">CLIENTE</h6>
+                                <h6 class="fw-bold mx-3">CLIENTE</h6>
                                 <span class="text-uppercase">{{sales.customer.fullName}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                <h6 class="fw-bold  mx-4">STATUS</h6>
+                                <h6 class="fw-bold mx-3">STATUS</h6>
                                 <span class="text-uppercase fw-bold"
-                                    [ngClass]="setColorStatus(sales.status)">{{getStatusMessage(sales.status)}}</span>
+                                    [ngClass]="setColorStatus(sales.status)" style="font-size: 10pt;">{{getStatusMessage(sales.status)}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                                 <h6 class="fw-bold mx-3">DT. COMPRA</h6>
                                 <span>{{ sales.orderDate | date : 'dd/MM/yyyy'}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                <h6 class="fw-bold mx-4">TOTAL </h6>
+                                <h6 class="fw-bold mx-3">TOTAL </h6>
                                 <span>{{ sales.subTotal - getAllDiscounts(sales) + sales.taxAmt | currency : 'BRL'}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column">

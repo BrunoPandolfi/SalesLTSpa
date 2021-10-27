@@ -20,7 +20,6 @@ export class ProductsResolver implements Resolve<any> {
     const productID = route.params.id;
     if (Number.isNaN(productID))
     {
-      console.log(typeof(productID))
       return of(null);
     }
   

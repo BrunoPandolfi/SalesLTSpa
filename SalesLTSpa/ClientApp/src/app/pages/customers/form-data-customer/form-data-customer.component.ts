@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faUserEdit, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { pipe } from 'rxjs';
 import { CustomerService } from '../customer.service';
 
@@ -23,7 +24,8 @@ export class FormDataCustomerComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     public activatedRoute: ActivatedRoute,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private toastrService: ToastrService
   ) {
       
   }
@@ -63,9 +65,9 @@ export class FormDataCustomerComponent implements OnInit {
         this.customerService.updateCustomerList();
         this.router.navigate(['/Customers']);
       });
+      this.toastrService.success('Cliente adicionado com sucesso!!', 'Sucesso');
     }
     else {
-      console.log(this.formCustomer);
       Object.keys(this.formCustomer.controls).forEach(field => {
         const control = this.formCustomer.get(field);
         control?.markAsDirty();
@@ -73,6 +75,7 @@ export class FormDataCustomerComponent implements OnInit {
           this.isValid(control);
         }
       })
+      this.toastrService.error('Alguns dados estão faltando!!', 'Erro');
     }
   }
 
@@ -108,13 +111,12 @@ export class FormDataCustomerComponent implements OnInit {
     if (this.formCustomer.valid) {
       var customerID = this.customer.customerID;
       this.customerService.putCustomer(customerID, this.formCustomer.value).subscribe((data) => {
-        //console.log(data);
         this.customerService.updateCustomerList();
         this.router.navigate(['/Customers']);
       });
+      this.toastrService.success('Dados do cliente atualizados com sucesso!!', 'Sucesso');
     }
     else {
-      //console.log(this.formCustomer);
       Object.keys(this.formCustomer.controls).forEach(field => {
         const control = this.formCustomer.get(field);
         control?.markAsDirty();
@@ -122,6 +124,7 @@ export class FormDataCustomerComponent implements OnInit {
           this.isValid(control);
         }
       })
+      this.toastrService.error('Alguns dados estão faltando!!', 'Erro');
     }
   }
 

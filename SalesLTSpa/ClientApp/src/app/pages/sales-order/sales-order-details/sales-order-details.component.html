@@ -2,10 +2,14 @@
     <h4>Carregando detalhes do pedido...</h4>
 </div>
 <div *ngIf="!loading">
-    <div class="card">
-        <div class="card-header p-3">
-            <h4>Pedido #123432</h4>
+    <div class="bg-white p-2 border rounded">
+        <div class="p-2 d-flex flex-row">
+            <fa-icon [icon]="faReceipt" size="2x"></fa-icon>
+            <h3 class="ms-3">Informações do pedido #{{salesOrder.purchaseOrderNumber}}</h3>
         </div>
+    </div>
+    <br/>
+    <div class="card">
         <div class="card-body">
             <div class="d-flex justify-space-around">
                 <div>
@@ -36,9 +40,9 @@
                         <div class="row">
                             <div class="col-10 d-flex flex-column">
                                 <h5 class="fw-bold">PRODUTO</h5>
-                                <div class="d-flex flex-row">
-                                    <img [src]="getThumbnailPhoto(salesDetail.product.thumbnailPhoto)" class="cover-product"/>
-                                    <div class="d-flex flex-column mt-2 ms-4">
+                                <div class="d-flex flex-row mt-3">
+                                    <img [src]="getThumbnailPhoto(salesDetail.product.thumbnailPhoto)" class="thumb-product mt-2"/>
+                                    <div class="d-flex flex-column ms-4">
                                         <h5>{{salesDetail.product.name}}</h5>
                                         <span>{{salesDetail.product.productNumber}}</span>
                                         <span>Quantidade: {{salesDetail.orderQty}}</span>

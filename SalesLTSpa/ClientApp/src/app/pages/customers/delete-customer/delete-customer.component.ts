@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faExclamationTriangle, faUserMinus } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class DeleteCustomerComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private customerService: CustomerService,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { 
     this.error = false;
   }
@@ -31,6 +33,7 @@ export class DeleteCustomerComponent implements OnInit {
     this.customerService.deleteCustomer(this.customer.customerID).subscribe(()=>{
         this.customerService.updateCustomerList();
         this.router.navigate(['/Customers']);
+        this.toastrService.warning('Cliente foi excluído do sistema', 'Completo');
     }, 
     erro =>{
       this.message = erro.error;

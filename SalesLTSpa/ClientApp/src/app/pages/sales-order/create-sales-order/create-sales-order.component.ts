@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 import { ProductsRoutingModule } from '../../products/products-routing.module';
 import { SalesOrderService } from '../sales-order.service';
@@ -26,6 +27,7 @@ export class CreateSalesOrderComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private salesOrderService: SalesOrderService,
     private router: Router,
+    private toastrService: ToastrService
   ) { 
     this.stepOne = true;
     this.stepTwo = false;
@@ -38,17 +40,15 @@ export class CreateSalesOrderComponent implements OnInit {
       this.products = data.products;
       this.salesOrderComplete = data;
       this.products.forEach(v => {v.OrderQty = 1, v.Added = false});
-      console.log(this.customers[1].customerID);
       this.firstCustomer = this.customers[1].customerID;
     });
   }
 
   advanceResume(){
-    //console.log(this.formSalesOrder.value);
+    console.log(this.salesOrderComplete);
     this.stepTwo = false;
     this.stepThree = true;
     this.salesOrderComplete["salesOrderDetails"] = this.salesOrderDetails;
-    console.log(this.salesOrderComplete);
   }
 
   backToStepOne(){
@@ -67,11 +67,9 @@ export class CreateSalesOrderComponent implements OnInit {
     this.products[indexProduct].OrderQty = 0;
     this.products[indexProduct].Added = false;
     this.salesOrderDetails.splice(index, 1);
-    //console.log(this.products);
   }
 
   addSalesOrderHeader(event){
-    //console.log(event);
     this.salesOrderComplete.salesOrderHeader = event;
     console.log(this.salesOrderComplete);
     this.stepOne = false;
@@ -80,17 +78,16 @@ export class CreateSalesOrderComponent implements OnInit {
 
   addSalesOrderDetails(event){
     this.salesOrderComplete.salesOrderDetails = event;
-    console.log(this.salesOrderComplete);
     this.stepTwo = false;
     this.stepThree = true;
   }
 
   createNewSalesOrder(event){
     this.salesOrderComplete = event;
-    console.log(this.salesOrderComplete);
     this.salesOrderService.postSalesOrder(this.salesOrderComplete).subscribe(()=>{
       this.salesOrderService.updateSalesOrderList();
       this.router.navigate(["/SalesOrder"]);
     });
+    this.toastrService.success('Pedido gerado com sucesso', 'Sucesso');
   }
 }

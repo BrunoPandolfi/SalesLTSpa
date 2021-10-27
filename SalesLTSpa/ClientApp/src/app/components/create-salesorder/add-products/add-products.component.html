@@ -41,8 +41,8 @@
     <div class="p-5 bg-secondary" style="width: 1165px">
         <ul class="list-group list-group-horizontal d-flex flex-wrap justify-content-center align-items-center" style="margin-left: -5px;">
             <li *ngFor="let product of products" class="list-group-item p-2 me-2 mt-2 rounded-2" style="width: 30%; height: 340px;">
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <img [src]="getImageServer(product.thumbnailPhoto)" class="cover-product">
+                <div class="d-flex flex-column justify-content-center align-items-center mt-2">
+                    <img [src]="getImageServer(product.thumbnailPhoto)" class="thumb-product">
                     <span class="mt-2" style="font-size: 10pt;">{{product.name}}</span>
                     <span class="mt-2" style="font-size: 15pt;">{{product.listPrice | currency: 'BRL'}}</span>
                     <div *ngIf="!product.Added" class="d-flex justify-content-center mt-2">
