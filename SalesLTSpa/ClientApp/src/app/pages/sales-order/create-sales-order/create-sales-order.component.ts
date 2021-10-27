@@ -45,7 +45,6 @@ export class CreateSalesOrderComponent implements OnInit {
   }
 
   advanceResume(){
-    console.log(this.salesOrderComplete);
     this.stepTwo = false;
     this.stepThree = true;
     this.salesOrderComplete["salesOrderDetails"] = this.salesOrderDetails;
@@ -71,7 +70,6 @@ export class CreateSalesOrderComponent implements OnInit {
 
   addSalesOrderHeader(event){
     this.salesOrderComplete.salesOrderHeader = event;
-    console.log(this.salesOrderComplete);
     this.stepOne = false;
     this.stepTwo = true;
   }

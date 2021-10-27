@@ -17,7 +17,7 @@
                 <dd class="col-10">{{calculateTaxAmt() | currency : 'BRL'}}</dd>
             </dl>
             <div *ngIf="salesOrderComplete.salesOrderDetails.length > 0">
-                <table class="table align-middle">
+                <table class="table text-center">
                     <thead >
                         <tr>
                            <th scope="col">Item</th> 
@@ -34,9 +34,9 @@
                             <td scope="col">{{i+1}}</td>
                             <td scope="col">{{item.Product.name}}</td>
                             <td scope="col">{{item.OrderQty}}</td>
-                            <td scope="col">{{item.UnitPrice}}</td>
-                            <td scope="col">20</td>
-                            <td scope="col">R$300,00</td>
+                            <td scope="col">{{item.UnitPrice | currency: 'BRL'}}</td>
+                            <td scope="col">{{item.UnitPriceDiscount / item.UnitPrice | percent}}</td>
+                            <td scope="col">{{item.UnitPriceDiscount | currency: 'BRL'}}</td>
                             <td>
                                 <a class="btn btn-link">Remover</a>
                             </td>
