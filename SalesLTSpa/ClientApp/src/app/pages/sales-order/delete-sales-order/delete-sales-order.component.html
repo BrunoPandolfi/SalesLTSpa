@@ -16,7 +16,7 @@
             <dt class="col-2">Data do Pedido</dt>
             <dd class="col-10">{{salesOrder.orderDate | date: 'dd/MM/yyyy'}}</dd>
             <dt class="col-2">Status</dt>
-            <dd class="col-10">{{salesOrder.status}}</dd>
+            <dd class="col-10">{{getStatusMessage(salesOrder.status)}}</dd>
         </dl>
         <a class="btn btn-danger me-2" (click)="deleteSalesOrder()">Excluir</a>
         <a class="btn btn-info" routerLink="/SalesOrder">Voltar</a>

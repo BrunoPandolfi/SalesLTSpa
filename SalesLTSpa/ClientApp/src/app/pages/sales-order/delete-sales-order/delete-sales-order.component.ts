@@ -33,4 +33,7 @@ export class DeleteSalesOrderComponent implements OnInit {
     });
   }
 
+  getStatusMessage(status){
+    return this.salesOrderService.getStatusMessage(status);
+  }
 }
