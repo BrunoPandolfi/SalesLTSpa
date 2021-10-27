@@ -27,9 +27,9 @@
                                 <span class="text-uppercase">{{sales.customer.fullName}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
-                                <h6 class="fw-bold mx-3">STATUS</h6>
-                                <span class="text-uppercase fw-bold"
-                                    [ngClass]="setColorStatus(sales.status)" style="font-size: 10pt;">{{getStatusMessage(sales.status)}}</span>
+                                <h6 class="fw-bold mx-3 mb-2">STATUS</h6>
+                                <span class="fw-bold status"
+                                    [ngClass]="setColorStatus(sales.status)" >{{getStatusMessage(sales.status)}}</span>
                             </div>
                             <div class="col-2 d-flex flex-column justify-content-center align-items-center">
                                 <h6 class="fw-bold mx-3">DT. COMPRA</h6>

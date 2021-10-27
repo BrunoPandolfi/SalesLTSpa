@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   salesOrders: any;
   salesOrdersLimit: any;
   maxNumber = 5;
-  customers: any;
+  customers: any[];
   faBars = faBars;
 
   constructor(
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     private toastrService: ToastrService
    
   ) { 
-
+    this.customers = [];
   }
 
   ngOnInit(): void {
@@ -32,8 +32,15 @@ export class HomeComponent implements OnInit {
       let arrLength = this.salesOrders.length;
       this.salesOrdersLimit = this.salesOrders.slice(0, this.maxNumber);
     });
-    this.customerService.getAllCustomersAndSalesOrder().subscribe(data=>{
-      this.customers = data;
+    this.customerService.getAllCustomersAndSalesOrder().subscribe((data: any)=>{
+      data.map((customer)=>{
+        if (customer.salesOrders.length !== 0){
+          this.customers.push(customer);
+        }
+      })
+      this.customers.sort((x, y) => {
+        return y.salesOrders.length - x.salesOrders.length
+      });
     })
   }
 

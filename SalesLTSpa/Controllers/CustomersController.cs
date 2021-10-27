@@ -58,7 +58,11 @@ namespace SalesLTSpa.Controllers
             var customers = await _customerService.FindAllAsync();
             foreach (var customer in customers)
             {
-                customer.salesOrders = await _salesOrderService.FindAllByCustomerAsync(customer.CustomerID);
+                var salesOrders = await _salesOrderService.FindAllByCustomerAsync(customer.CustomerID);
+                if (salesOrders.Any())
+                {
+                    customer.salesOrders = salesOrders;
+                }
             }
             return customers;
         }

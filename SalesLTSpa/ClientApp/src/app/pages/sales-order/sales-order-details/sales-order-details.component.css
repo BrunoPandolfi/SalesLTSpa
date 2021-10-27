@@ -1,0 +1,10 @@
+#status {
+    font-size: 9pt;
+}
+
+@media screen and (max-width: 1280px) {
+    #status{
+        font-size: pt;
+        color: green;
+    }
+}
