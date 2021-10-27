@@ -15,5 +15,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\assets\Product.ts" />
+    <TypeScriptCompile Include="wwwroot\assets\SaleStatus.enum.ts" />
+  </ItemGroup>
+
 
 </Project>

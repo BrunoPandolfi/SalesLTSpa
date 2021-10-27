@@ -63,6 +63,7 @@ namespace SalesLTSpa
                 RequestPath = new PathString("/Images")
             });
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -76,6 +77,14 @@ namespace SalesLTSpa
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync(File.ReadAllText($"{env.ContentRootPath}/wwwroot/index.html"));
+                });
+                endpoints.MapGet("/{nome}", async context =>
+                {
+                    await context.Response.WriteAsync(File.ReadAllText($"{env.ContentRootPath}/wwwroot/index.html"));
+                });
             });
         }
     }
